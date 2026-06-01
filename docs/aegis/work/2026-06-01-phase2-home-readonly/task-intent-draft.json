@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "requestedOutcome": "按 docs/EXECUTION.md 推进 Phase 2，让 Home 从 Tauri 后端读取环境摘要、健康检查和已安装版本，并按真实完成项更新文档。",
+  "goal": "完成 Phase 2 Home 可验证的只读环境总览切片。",
+  "successEvidence": [
+    "前端测试、pnpm build、cargo test 通过；Home 使用 Tauri command 数据且有 mock fallback；docs/EXECUTION.md 只勾真实完成项。"
+  ],
+  "stopCondition": "完成并验证；或发现后端契约/平台限制导致当前切片需重新规划；或验证失败需要继续修复。",
+  "nonGoals": [
+    "商业化、账号、云同步、遥测、真实写操作、Windows 手动端到端验证。"
+  ],
+  "scope": "src-tauri/src/nvm, src-tauri/src/lib.rs, src/shared, src/App.tsx, src/App.test.tsx, docs/EXECUTION.md",
+  "changeKinds": [
+    "implementation"
+  ],
+  "riskHints": [
+    "跨 Rust/TS 契约、Tauri invoke fallback、不能误勾未实现 backend 写操作。"
+  ]
+}

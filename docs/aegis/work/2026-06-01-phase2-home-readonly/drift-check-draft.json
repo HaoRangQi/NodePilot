@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase2-home-readonly",
+  "taskIntentRef": "docs/aegis/work/2026-06-01-phase2-home-readonly/task-intent-draft.json",
+  "baselineRefs": [
+    "docs/EXECUTION.md Phase 2"
+  ],
+  "scopeStatus": "仍在 Phase 2 Home 只读接入范围内。",
+  "compatStatus": "保持前端不直接执行 shell；新增只读 Tauri command；写操作仍未实现。",
+  "retirementStatus": "mock fallback 仍保留，后续真实 backend 完整接入后可逐步降级为测试 fixture。",
+  "newRiskSignals": [],
+  "decision": "continue"
+}

@@ -152,6 +152,26 @@ pub struct BackendDetection {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct EnvironmentSummary {
+    pub current_node_version: Option<String>,
+    pub npm_version: Option<String>,
+    pub pnpm_version: Option<String>,
+    pub yarn_version: Option<String>,
+    pub node_path: Option<String>,
+    pub npm_path: Option<String>,
+    pub backend_kind: BackendKind,
+    pub platform: String,
+    pub arch: String,
+    pub version_source: String,
+    pub default_version: Option<String>,
+    pub default_exists: bool,
+    pub default_matches_current: bool,
+    pub health: HealthCheckResult,
+    pub installed_versions: Vec<VersionInfo>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct CommandResult<T> {
     pub status: TaskStatus,
     pub data: Option<T>,

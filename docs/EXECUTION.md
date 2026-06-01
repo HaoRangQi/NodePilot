@@ -34,6 +34,7 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 已安装 pnpm 依赖并生成 `pnpm-lock.yaml`。
 - [x] 已替换默认示例 UI。
 - [x] 已实现 NodePilot backend 类型、parser 与测试基线。
+- [x] Home 已接入 Tauri 只读环境摘要并保留 mock fallback。
 - [ ] 已完成端到端验证。
 
 ## Phase 0: Project Baseline
@@ -180,57 +181,57 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 2.1 Environment Summary
 
-- [ ] 展示当前 Node 版本。
-- [ ] 展示当前 npm 版本。
-- [ ] 展示当前 pnpm 版本。
-- [ ] 展示当前 yarn 版本。
-- [ ] 展示 Node 可执行文件路径。
-- [ ] 展示 npm 可执行文件路径。
-- [ ] 展示 backend 类型。
-- [ ] 展示系统平台。
-- [ ] 展示 CPU 架构。
+- [x] 展示当前 Node 版本。
+- [x] 展示当前 npm 版本。
+- [x] 展示当前 pnpm 版本。
+- [x] 展示当前 yarn 版本。
+- [x] 展示 Node 可执行文件路径。
+- [x] 展示 npm 可执行文件路径。
+- [x] 展示 backend 类型。
+- [x] 展示系统平台。
+- [x] 展示 CPU 架构。
 
 ### 2.2 Version Source
 
-- [ ] 识别 Node 来源为 `nvm-sh`。
-- [ ] 识别 Node 来源为 `nvm-windows`。
-- [ ] 识别 Node 来源为 system Node。
-- [ ] 无法识别时显示 unknown。
-- [ ] 当来源不是 nvm 时给出提示。
+- [x] 识别 Node 来源为 `nvm-sh`。
+- [x] 识别 Node 来源为 `nvm-windows`。
+- [x] 识别 Node 来源为 system Node。
+- [x] 无法识别时显示 unknown。
+- [x] 当来源不是 nvm 时给出提示。
 
 ### 2.3 Default Version
 
-- [ ] 展示 default 版本。
-- [ ] 标注 default 是否存在。
-- [ ] 标注 default 是否与当前版本一致。
-- [ ] macOS/Linux 文案说明 default 影响新 shell。
-- [ ] Windows 文案说明 `nvm use` 持久切换 symlink。
+- [x] 展示 default 版本。
+- [x] 标注 default 是否存在。
+- [x] 标注 default 是否与当前版本一致。
+- [x] macOS/Linux 文案说明 default 影响新 shell。
+- [x] Windows 文案说明 `nvm use` 持久切换 symlink。
 
 ### 2.4 Health Checks
 
-- [ ] 检测 nvm 未安装。
-- [ ] 检测 nvm 已安装但未加载。
-- [ ] 检测 Node PATH 不来自 nvm。
-- [ ] 检测 npm prefix 冲突。
+- [x] 检测 nvm 未安装。
+- [x] 检测 nvm 已安装但未加载。
+- [x] 检测 Node PATH 不来自 nvm。
+- [x] 检测 npm prefix 冲突。
 - [ ] 检测 Windows 管理员权限不足。
 - [ ] 检测 Windows 旧 Node 安装冲突。
 - [ ] 检测 Apple Silicon 安装旧版本风险。
 - [ ] 检测 `.nvmrc` 指向版本未安装。
-- [ ] 检测 default 指向版本不存在。
+- [x] 检测 default 指向版本不存在。
 
 ### 2.5 Recommended Actions
 
-- [ ] 未安装 nvm 时推荐安装。
-- [ ] default 缺失时推荐设置 default。
-- [ ] PATH 冲突时推荐修复路径。
+- [x] 未安装 nvm 时推荐安装。
+- [x] default 缺失时推荐设置 default。
+- [x] PATH 冲突时推荐修复路径。
 - [ ] `.nvmrc` 与当前版本不一致时推荐应用项目版本。
 - [ ] 权限不足时推荐重新以管理员权限运行或手动操作。
 
 ### 2.6 Phase Verification
 
-- [ ] 模拟正常状态。
-- [ ] 模拟 nvm 未安装状态。
-- [ ] 模拟 PATH 冲突状态。
+- [x] 模拟正常状态。
+- [x] 模拟 nvm 未安装状态。
+- [x] 模拟 PATH 冲突状态。
 - [ ] 模拟 Windows 权限不足状态。
 
 ## Phase 3: nvm Installation and Initialization

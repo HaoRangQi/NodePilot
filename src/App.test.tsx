@@ -1,11 +1,26 @@
-import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
+import { MOCK_BACKEND_SNAPSHOT } from "./shared/api/backend";
+import type { EnvironmentSummary } from "./shared/types/backend";
+
+const getBackendSnapshotMock = vi.hoisted(() => vi.fn());
+
+vi.mock("./shared/api/backend", async () => {
+  const actual = await vi.importActual<typeof import("./shared/api/backend")>("./shared/api/backend");
+
+  return {
+    ...actual,
+    getBackendSnapshot: getBackendSnapshotMock,
+  };
+});
 
 describe("App", () => {
   beforeEach(() => {
     localStorage.clear();
     localStorage.setItem("nodepilot.locale", "en-US");
+    getBackendSnapshotMock.mockReset();
+    getBackendSnapshotMock.mockResolvedValue(MOCK_BACKEND_SNAPSHOT);
   });
 
   it("renders the NodePilot management shell", () => {
@@ -25,5 +40,81 @@ describe("App", () => {
 
     expect(screen.getByRole("heading", { name: "Home" })).toBeInTheDocument();
     expect(container.querySelector(".app-shell")).toHaveAttribute("data-theme", "dark");
+  });
+
+  it("renders the backend snapshot on Home", async () => {
+    const snapshot: EnvironmentSummary = {
+      ...MOCK_BACKEND_SNAPSHOT,
+      currentNodeVersion: "v18.20.4",
+      npmVersion: "10.7.0",
+      pnpmVersion: null,
+      backendKind: "nvm-windows",
+      arch: "x64",
+      versionSource: "nvm-windows",
+      defaultVersion: null,
+      defaultExists: false,
+      defaultMatchesCurrent: false,
+      health: {
+        backend: "nvm-windows",
+        items: [
+          {
+            key: "admin_required",
+            status: "pending",
+            summary: "Windows activation may require administrator permissions",
+            detail: null,
+          },
+        ],
+      },
+    };
+    getBackendSnapshotMock.mockResolvedValueOnce(snapshot);
+
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByRole("heading", { name: "Node v18.20.4" })).toBeInTheDocument();
+    });
+    expect(screen.getAllByText("nvm-windows").length).toBeGreaterThan(0);
+    expect(screen.getByText("10.7.0")).toBeInTheDocument();
+    expect(
+      screen.getByText((_, element) => element?.textContent === "Platform: macos / x64"),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Windows activation may require administrator permissions")).toBeInTheDocument();
+    expect(screen.getByText("Check administrator rights")).toBeInTheDocument();
+  });
+
+  it("renders missing backend and PATH conflict recommendations", async () => {
+    getBackendSnapshotMock.mockResolvedValueOnce({
+      ...MOCK_BACKEND_SNAPSHOT,
+      backendKind: "missing",
+      versionSource: "system",
+      defaultVersion: null,
+      defaultExists: false,
+      defaultMatchesCurrent: false,
+      health: {
+        backend: "missing",
+        items: [
+          {
+            key: "nvm_script",
+            status: "failed",
+            summary: "~/.nvm/nvm.sh is missing",
+            detail: null,
+          },
+          {
+            key: "node_path_source",
+            status: "failed",
+            summary: "Node PATH does not appear to come from the detected backend",
+            detail: "/usr/local/bin/node",
+          },
+        ],
+      },
+    } satisfies EnvironmentSummary);
+
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Install nvm")).toBeInTheDocument();
+    });
+    expect(screen.getByText("Copy PATH fix")).toBeInTheDocument();
+    expect(screen.getByText("Current Node is not managed by nvm. Check PATH ordering.")).toBeInTheDocument();
   });
 });

@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import { getBackendSnapshot, MOCK_BACKEND_SNAPSHOT } from "./shared/api/backend";
+import type { EnvironmentSummary, HealthCheckItem, TaskStatus } from "./shared/types/backend";
 import "./App.css";
 
 type Screen = "home" | "versions" | "remote" | "projects" | "activity" | "settings";
@@ -52,6 +54,11 @@ type ActivityItem = {
   time: string;
   command: string;
   output: string;
+};
+
+type HomeAction = {
+  title: string;
+  description: string;
 };
 
 const PROJECT_NAME = "NodePilot";
@@ -203,6 +210,13 @@ const translations = {
       description:
         "当前通过 nvm-sh 在 macOS arm64 上运行。默认版本是 v20.18.1；新的 shell 会使用 default alias。",
       npmLabel: "npm",
+      pnpmLabel: "pnpm",
+      yarnLabel: "yarn",
+      nodePathLabel: "Node 路径",
+      npmPathLabel: "npm 路径",
+      platformLabel: "平台",
+      sourceLabel: "来源",
+      unavailable: "未检测到",
       npmHint: "~/.nvm/versions/node/v22.11.0/bin/npm",
       backendLabel: "Backend",
       backendHint: "~/.nvm/nvm.sh 已检测到",
@@ -217,6 +231,20 @@ const translations = {
       ],
       nextEyebrow: "下一步",
       nextTitle: "推荐修复",
+      defaultMissing: "default 指向版本不存在",
+      defaultMatches: "default 与当前版本一致",
+      defaultDiffers: "default 与当前版本不一致",
+      sourceNotNvm: "当前 Node 来源不是 nvm 管理版本，建议检查 PATH。",
+      nvmUseScope: "macOS/Linux 的 nvm use 只影响当前任务 shell；default alias 影响新的 shell。",
+      windowsUseScope: "Windows 的 nvm use 会切换全局 symlink，可能需要管理员权限。",
+      installNvmTitle: "安装 nvm",
+      installNvmDescription: "先安装当前平台支持的 nvm backend。",
+      setDefaultTitle: "将当前版本设为 default",
+      setDefaultDescription: "让当前环境和新 shell 行为保持一致。",
+      fixPathTitle: "复制 PATH 修复片段",
+      fixPathDescription: "手动更新 shell profile。",
+      adminTitle: "检查管理员权限",
+      adminDescription: "Windows 切换版本可能需要以管理员权限运行",
       actions: [
         ["将 v22.11.0 设为默认", "让当前环境和新 shell 行为保持一致"],
         ["安装最新 LTS", "满足 ~/Work/website 的 .nvmrc 要求"],
@@ -327,6 +355,13 @@ const translations = {
       description:
         "Running through nvm-sh on macOS arm64. Default version is v20.18.1; new shells will use the default alias.",
       npmLabel: "npm",
+      pnpmLabel: "pnpm",
+      yarnLabel: "yarn",
+      nodePathLabel: "Node path",
+      npmPathLabel: "npm path",
+      platformLabel: "Platform",
+      sourceLabel: "Source",
+      unavailable: "Not detected",
       npmHint: "~/.nvm/versions/node/v22.11.0/bin/npm",
       backendLabel: "Backend",
       backendHint: "~/.nvm/nvm.sh detected",
@@ -341,6 +376,20 @@ const translations = {
       ],
       nextEyebrow: "Next actions",
       nextTitle: "Recommended fixes",
+      defaultMissing: "default points to a missing version",
+      defaultMatches: "default matches the current version",
+      defaultDiffers: "default differs from the current version",
+      sourceNotNvm: "Current Node is not managed by nvm. Check PATH ordering.",
+      nvmUseScope: "On macOS/Linux, nvm use only affects this task shell; default alias affects new shells.",
+      windowsUseScope: "On Windows, nvm use switches the global symlink and may require administrator permissions.",
+      installNvmTitle: "Install nvm",
+      installNvmDescription: "Install the supported nvm backend for this platform first.",
+      setDefaultTitle: "Set current as default",
+      setDefaultDescription: "Align current and new shell behavior.",
+      fixPathTitle: "Copy PATH fix",
+      fixPathDescription: "Update the shell profile manually.",
+      adminTitle: "Check administrator rights",
+      adminDescription: "Windows version switching may require administrator permissions",
       actions: [
         ["Set v22.11.0 as default", "Align current and new shell behavior"],
         ["Install latest LTS", "Required by ~/Work/website .nvmrc"],
@@ -426,6 +475,98 @@ function statusTone(status: StatusKey): Tone {
   return "neutral";
 }
 
+function taskStatusToStatusKey(status: TaskStatus): StatusKey {
+  switch (status) {
+    case "success":
+      return "ok";
+    case "failed":
+      return "issue";
+    case "pending":
+      return "warn";
+    case "running":
+      return "running";
+    case "cancelled":
+      return "missing";
+  }
+}
+
+function backendLabel(kind: EnvironmentSummary["backendKind"]): string {
+  switch (kind) {
+    case "nvm-sh":
+      return "nvm-sh";
+    case "nvm-windows":
+      return "nvm-windows";
+    case "missing":
+      return "missing";
+    case "unsupported":
+      return "unsupported";
+  }
+}
+
+function backendHint(snapshot: EnvironmentSummary, copy: Copy): string {
+  const scopeHint =
+    snapshot.backendKind === "nvm-windows" ? copy.home.windowsUseScope : copy.home.nvmUseScope;
+  return `${snapshot.platform} ${snapshot.arch} · ${scopeHint}`;
+}
+
+function defaultHint(snapshot: EnvironmentSummary, copy: Copy): string {
+  if (!snapshot.defaultVersion) return copy.home.unavailable;
+  if (!snapshot.defaultExists) return copy.home.defaultMissing;
+  return snapshot.defaultMatchesCurrent ? copy.home.defaultMatches : copy.home.defaultDiffers;
+}
+
+function healthChecks(snapshot: EnvironmentSummary, copy: Copy): HealthCheckItem[] {
+  const checks = snapshot.health.items.slice(0, 5);
+  if (snapshot.versionSource !== "nvm-sh" && snapshot.versionSource !== "nvm-windows") {
+    checks.push({
+      key: "version_source",
+      status: "failed",
+      summary: copy.home.sourceNotNvm,
+      detail: snapshot.nodePath,
+    });
+  }
+  return checks;
+}
+
+function recommendedActions(snapshot: EnvironmentSummary, copy: Copy): HomeAction[] {
+  const actions: HomeAction[] = [];
+  const hasMissingNvm = snapshot.backendKind === "missing";
+  const hasPathIssue = snapshot.health.items.some((item) => item.key === "node_path_source" && item.status === "failed");
+  const hasPrefixIssue = snapshot.health.items.some((item) => item.key === "npm_prefix" && item.status === "failed");
+  const hasPermissionIssue = snapshot.health.items.some(
+    (item) => item.key === "admin_required" && item.status !== "success",
+  );
+
+  if (hasMissingNvm) {
+    actions.push({
+      title: copy.home.installNvmTitle,
+      description: copy.home.installNvmDescription,
+    });
+  }
+  if (!snapshot.defaultVersion || !snapshot.defaultExists || !snapshot.defaultMatchesCurrent) {
+    actions.push({
+      title: copy.home.setDefaultTitle,
+      description: copy.home.setDefaultDescription,
+    });
+  }
+  if (hasPathIssue || hasPrefixIssue) {
+    actions.push({
+      title: copy.home.fixPathTitle,
+      description: copy.home.fixPathDescription,
+    });
+  }
+  if (hasPermissionIssue) {
+    actions.push({
+      title: copy.home.adminTitle,
+      description: copy.home.adminDescription,
+    });
+  }
+
+  return actions.length > 0
+    ? actions
+    : copy.home.actions.map(([title, description]) => ({ title, description }));
+}
+
 function Chip({ label, tone = "neutral" }: { label: string; tone?: Tone }) {
   return <span className={`chip chip-${tone}`}>{label}</span>;
 }
@@ -439,17 +580,29 @@ function SectionHeader({ title, eyebrow }: { title: string; eyebrow: string }) {
   );
 }
 
-function HomeScreen({ copy }: { copy: Copy }) {
+function HomeScreen({
+  copy,
+  snapshot,
+  onRefresh,
+}: {
+  copy: Copy;
+  snapshot: EnvironmentSummary;
+  onRefresh: () => void;
+}) {
+  const checks = healthChecks(snapshot, copy);
+  const actions = recommendedActions(snapshot, copy);
+  const currentVersion = snapshot.currentNodeVersion ?? copy.home.unavailable;
+
   return (
     <section className="screen-grid">
       <div className="hero-panel">
         <div>
           <span className="eyebrow">{copy.home.eyebrow}</span>
-          <h1>{copy.home.title}</h1>
-          <p>{copy.home.description}</p>
+          <h1>Node {currentVersion}</h1>
+          <p>{backendHint(snapshot, copy)}</p>
         </div>
         <div className="hero-actions">
-          <button className="button-primary" type="button">
+          <button className="button-primary" type="button" onClick={onRefresh}>
             {copy.common.refresh}
           </button>
           <button className="button-tonal" type="button">
@@ -461,37 +614,65 @@ function HomeScreen({ copy }: { copy: Copy }) {
       <div className="metric-grid">
         <article className="metric">
           <span>{copy.home.npmLabel}</span>
-          <strong>10.9.0</strong>
-          <small>{copy.home.npmHint}</small>
+          <strong>{snapshot.npmVersion ?? copy.home.unavailable}</strong>
+          <small>{snapshot.npmPath ?? copy.home.unavailable}</small>
         </article>
         <article className="metric">
           <span>{copy.home.backendLabel}</span>
-          <strong>nvm-sh</strong>
-          <small>{copy.home.backendHint}</small>
+          <strong>{backendLabel(snapshot.backendKind)}</strong>
+          <small>
+            {copy.home.platformLabel}: {snapshot.platform} / {snapshot.arch}
+          </small>
         </article>
         <article className="metric">
           <span>{copy.home.defaultLabel}</span>
-          <strong>v20.18.1</strong>
-          <small>{copy.home.defaultHint}</small>
+          <strong>{snapshot.defaultVersion ?? copy.home.unavailable}</strong>
+          <small>{defaultHint(snapshot, copy)}</small>
+        </article>
+        <article className="metric">
+          <span>{copy.home.nodePathLabel}</span>
+          <strong>{snapshot.versionSource}</strong>
+          <small>{snapshot.nodePath ?? copy.home.unavailable}</small>
+        </article>
+        <article className="metric">
+          <span>{copy.home.pnpmLabel}</span>
+          <strong>{snapshot.pnpmVersion ?? copy.home.unavailable}</strong>
+          <small>{copy.home.sourceLabel}: {snapshot.versionSource}</small>
+        </article>
+        <article className="metric">
+          <span>{copy.home.yarnLabel}</span>
+          <strong>{snapshot.yarnVersion ?? copy.home.unavailable}</strong>
+          <small>
+            {copy.home.npmPathLabel}: {snapshot.npmPath ?? copy.home.unavailable}
+          </small>
         </article>
       </div>
 
       <article className="panel">
         <SectionHeader eyebrow={copy.home.healthEyebrow} title={copy.home.healthTitle} />
         <div className="check-list">
-          {(["ok", "issue", "warn"] as const).map((status, index) => (
-            <div className="check-row" key={status}>
-              <Chip label={copy.status[status]} tone={statusTone(status)} />
-              <span>{copy.home.checks[index]}</span>
+          {checks.map((item) => {
+            const status = taskStatusToStatusKey(item.status);
+            return (
+              <div className="check-row" key={item.key}>
+                <Chip label={copy.status[status]} tone={statusTone(status)} />
+                <span title={item.detail ?? undefined}>{item.summary}</span>
+              </div>
+            );
+          })}
+          {checks.length === 0 && (
+            <div className="check-row">
+              <Chip label={copy.status.ok} tone="success" />
+              <span>{copy.home.defaultMatches}</span>
             </div>
-          ))}
+          )}
         </div>
       </article>
 
       <article className="panel">
         <SectionHeader eyebrow={copy.home.nextEyebrow} title={copy.home.nextTitle} />
         <div className="action-list">
-          {copy.home.actions.map(([title, description]) => (
+          {actions.map(({ title, description }) => (
             <button className="action-button" type="button" key={title}>
               <span>{title}</span>
               <small>{description}</small>
@@ -745,9 +926,19 @@ function App() {
   const [activeScreen, setActiveScreen] = useState<Screen>("home");
   const [locale, setLocale] = useState<Locale>(getInitialLocale);
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
+  const [backendSnapshot, setBackendSnapshot] =
+    useState<EnvironmentSummary>(MOCK_BACKEND_SNAPSHOT);
   const copy = translations[locale];
 
   const activeTitle = useMemo(() => copy.navigation[activeScreen], [activeScreen, copy]);
+
+  function refreshBackendSnapshot() {
+    void getBackendSnapshot().then(setBackendSnapshot);
+  }
+
+  useEffect(() => {
+    refreshBackendSnapshot();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(LOCALE_STORAGE_KEY, locale);
@@ -781,7 +972,13 @@ function App() {
         );
       case "home":
       default:
-        return <HomeScreen copy={copy} />;
+        return (
+          <HomeScreen
+            copy={copy}
+            snapshot={backendSnapshot}
+            onRefresh={refreshBackendSnapshot}
+          />
+        );
     }
   }
 
@@ -821,9 +1018,15 @@ function App() {
             <h1>{activeTitle}</h1>
           </div>
           <div className="status-strip">
-            <Chip label="nvm-sh" tone="info" />
-            <Chip label={`${copy.status.current} v22.11.0`} tone="success" />
-            <Chip label={`${copy.status.default} v20.18.1`} tone="warning" />
+            <Chip label={backendLabel(backendSnapshot.backendKind)} tone="info" />
+            <Chip
+              label={`${copy.status.current} ${backendSnapshot.currentNodeVersion ?? copy.home.unavailable}`}
+              tone="success"
+            />
+            <Chip
+              label={`${copy.status.default} ${backendSnapshot.defaultVersion ?? copy.home.unavailable}`}
+              tone={backendSnapshot.defaultMatchesCurrent ? "success" : "warning"}
+            />
           </div>
         </header>
         {renderScreen()}

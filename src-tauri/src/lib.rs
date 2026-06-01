@@ -1,7 +1,9 @@
 pub mod nvm;
 pub mod tasks;
 
-use nvm::types::{BackendDetection, CommandResult, HealthCheckResult, VersionInfo};
+use nvm::types::{
+    BackendDetection, CommandResult, EnvironmentSummary, HealthCheckResult, VersionInfo,
+};
 use nvm::types::{BackendKind, CapabilitySet};
 
 #[tauri::command]
@@ -33,6 +35,11 @@ fn list_remote() -> CommandResult<Vec<VersionInfo>> {
     nvm::list_remote()
 }
 
+#[tauri::command]
+fn environment_summary() -> EnvironmentSummary {
+    nvm::environment_summary()
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -42,7 +49,8 @@ pub fn run() {
             detect_backend,
             health_check,
             list_installed,
-            list_remote
+            list_remote,
+            environment_summary
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

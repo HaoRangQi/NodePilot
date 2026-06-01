@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase2-home-readonly",
+  "currentTodo": "继续按 docs/EXECUTION.md 推进 Phase 2 后续真实数据/写操作前置能力",
+  "completedTodos": [
+    "新增 environment_summary Tauri command；新增 TS backend API/types；Home/top bar 接入只读 snapshot；补测试和文档勾选；关闭超时 explorer。"
+  ],
+  "activeSlice": "Phase 2 Home 只读数据接入",
+  "evidenceRefs": [
+    "pnpm test, pnpm build, cargo test, pnpm tauri dev, Browser Home check"
+  ],
+  "blockedOn": null,
+  "nextStep": "下一切片建议做 Versions 本地列表真实数据接入或 Activity task center 基础模型。",
+  "updatedAt": "2026-06-01"
+}

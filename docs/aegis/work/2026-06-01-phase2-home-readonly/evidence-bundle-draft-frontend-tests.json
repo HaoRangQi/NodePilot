@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "frontend-tests",
+  "type": "command",
+  "source": "pnpm test",
+  "summary": "Vitest 2 files / 6 tests passed after Home backend snapshot integration and simulated missing/PATH/admin states.",
+  "verifier": "terminal output 2026-06-01 22:48"
+}

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "candidateDocs": [
+    "docs/EXECUTION.md Phase 2",
+    "src-tauri/src/nvm/types.rs",
+    "src/App.tsx"
+  ],
+  "whyRelevant": "执行文档定义勾选标准，后端类型定义前端契约，App.tsx 是当前 UI owner。",
+  "missingAuthority": []
+}

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "affectedLayers": [
+    "frontend/backend-contract"
+  ],
+  "owners": [
+    "NodePilot Home read-only integration"
+  ],
+  "invariants": [
+    "前端禁止直接执行 shell；所有环境读取通过 Tauri command；浏览器测试必须可 fallback。"
+  ],
+  "compatBoundary": "不实现 install/uninstall/use/default 写操作；不承诺改变用户 shell 环境。",
+  "nonGoals": [
+    "商业化、账号、云同步、遥测、真实写操作、Windows 手动端到端验证。"
+  ]
+}

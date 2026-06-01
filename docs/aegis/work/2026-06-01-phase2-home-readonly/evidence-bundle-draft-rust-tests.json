@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "rust-tests",
+  "type": "command",
+  "source": "cargo test --manifest-path src-tauri/Cargo.toml",
+  "summary": "Rust unit tests passed, 20 tests including environment summary health/source helpers.",
+  "verifier": "terminal output 2026-06-01 22:46"
+}

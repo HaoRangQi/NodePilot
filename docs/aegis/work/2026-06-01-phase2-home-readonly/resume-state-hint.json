@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase2-home-readonly",
+  "lastCheckpointRef": "docs/aegis/work/2026-06-01-phase2-home-readonly/todo-checkpoint-draft.json",
+  "resumeInstruction": "恢复时先读 docs/EXECUTION.md Phase 2/4/7 和 git status；不要假设写操作已实现。",
+  "knownPartialWork": [
+    "新增 environment_summary Tauri command；新增 TS backend API/types；Home/top bar 接入只读 snapshot；补测试和文档勾选；关闭超时 explorer。"
+  ],
+  "mustReadBeforeContinuing": [
+    "docs/aegis/work/2026-06-01-phase2-home-readonly/10-intent.md",
+    "docs/aegis/work/2026-06-01-phase2-home-readonly/20-checkpoint.md",
+    "docs/aegis/work/2026-06-01-phase2-home-readonly/todo-checkpoint-draft.json"
+  ],
+  "unsafeToAssume": [
+    "不要把 mock 数据当真实状态；不要勾 install/uninstall/use/default；不要宣称 Windows 真实端到端已验证。"
+  ]
+}

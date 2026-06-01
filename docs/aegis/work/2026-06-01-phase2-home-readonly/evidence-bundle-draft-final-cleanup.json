@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "final-cleanup",
+  "type": "command",
+  "source": "git diff --check; lsof -nP -iTCP:1420 -sTCP:LISTEN",
+  "summary": "Whitespace check passed and port 1420 had no residual listener after tauri dev shutdown.",
+  "verifier": "terminal output 2026-06-01 22:53"
+}
