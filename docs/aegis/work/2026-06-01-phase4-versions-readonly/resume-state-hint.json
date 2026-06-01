@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase4-versions-readonly",
+  "lastCheckpointRef": "docs/aegis/work/2026-06-01-phase4-versions-readonly/todo-checkpoint-draft.json",
+  "resumeInstruction": "恢复时先读 docs/EXECUTION.md Phase 4/7 和 git status；不要假设 use/default/uninstall 已实现。",
+  "knownPartialWork": [
+    "Versions 页面使用 backendSnapshot.installedVersions；删除静态 localVersions；补测试；更新 Phase 4.1 文档勾选；Tauri dev + 浏览器检查通过；超时 explorer 已释放。"
+  ],
+  "mustReadBeforeContinuing": [
+    "docs/aegis/work/2026-06-01-phase4-versions-readonly/10-intent.md",
+    "docs/aegis/work/2026-06-01-phase4-versions-readonly/20-checkpoint.md",
+    "docs/aegis/work/2026-06-01-phase4-versions-readonly/todo-checkpoint-draft.json"
+  ],
+  "unsafeToAssume": [
+    "不要把按钮存在当作写操作完成；不要勾打开目录/详情/删除保护。"
+  ]
+}

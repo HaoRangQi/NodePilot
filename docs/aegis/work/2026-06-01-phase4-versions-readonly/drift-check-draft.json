@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase4-versions-readonly",
+  "taskIntentRef": "docs/aegis/work/2026-06-01-phase4-versions-readonly/task-intent-draft.json",
+  "baselineRefs": [
+    "docs/EXECUTION.md Phase 4.1"
+  ],
+  "scopeStatus": "仍在 Phase 4.1 只读版本列表范围内。",
+  "compatStatus": "保持前端不执行 shell；使用已有 backend snapshot；写操作仍是 UI 预留。",
+  "retirementStatus": "Versions mock 列表已移除；mock fallback 仍集中在 shared/api/backend.ts。",
+  "newRiskSignals": [],
+  "decision": "continue"
+}

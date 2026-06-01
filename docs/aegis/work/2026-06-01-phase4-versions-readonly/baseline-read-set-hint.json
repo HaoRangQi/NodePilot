@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "candidateDocs": [
+    "docs/EXECUTION.md Phase 4.1",
+    "src/shared/types/backend.ts VersionInfo",
+    "src/App.tsx VersionsScreen"
+  ],
+  "whyRelevant": "执行文档定义勾选标准，VersionInfo 定义真实可用字段，VersionsScreen 是页面 owner。",
+  "missingAuthority": []
+}

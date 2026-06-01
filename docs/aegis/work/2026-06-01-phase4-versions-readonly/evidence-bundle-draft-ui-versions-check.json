@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "ui-versions-check",
+  "type": "browser",
+  "source": "Browser DOM check at http://localhost:1420/ Versions",
+  "summary": "Versions screen rendered 2 version rows from snapshot, current/default/LTS chips, no horizontal overflow, no Tauri default page.",
+  "verifier": "browser output 2026-06-01 23:06"
+}

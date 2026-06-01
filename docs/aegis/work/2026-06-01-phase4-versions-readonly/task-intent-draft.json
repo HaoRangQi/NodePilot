@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "requestedOutcome": "按 docs/EXECUTION.md 推进 Phase 4.1，让 Versions 页面使用 Tauri 后端返回的 installedVersions/snapshot 数据展示本地版本列表。",
+  "goal": "完成 Versions 本地版本列表的只读数据接入。",
+  "successEvidence": [
+    "前端测试、pnpm build、cargo test 通过；Versions 页面使用 backend snapshot；docs/EXECUTION.md 只勾真实完成项。"
+  ],
+  "stopCondition": "完成并验证；或发现后端数据不足导致部分 Phase 4.1 保持未勾；或验证失败继续修复。",
+  "nonGoals": [
+    "安装/卸载/切换/默认版本写操作、详情抽屉、打开目录、复制版本号。"
+  ],
+  "scope": "src/App.tsx, src/App.test.tsx, src/shared/types/backend.ts, docs/EXECUTION.md",
+  "changeKinds": [
+    "implementation"
+  ],
+  "riskHints": [
+    "不能把 mock path/npm 当真实 backend 能力；不能实现或勾选写操作。"
+  ]
+}

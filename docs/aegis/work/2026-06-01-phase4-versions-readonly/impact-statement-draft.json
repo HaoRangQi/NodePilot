@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "affectedLayers": [
+    "frontend/backend-contract"
+  ],
+  "owners": [
+    "NodePilot Versions read-only list"
+  ],
+  "invariants": [
+    "前端不执行 shell；写操作按钮只是 UI 预留，不声称功能完成。"
+  ],
+  "compatBoundary": "不实现 use/default/uninstall 写操作，不修改 Rust adapter 写操作。",
+  "nonGoals": [
+    "安装/卸载/切换/默认版本写操作、详情抽屉、打开目录、复制版本号。"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase4-versions-readonly",
+  "currentTodo": "继续按 docs/EXECUTION.md 推进 Phase 4.2/4.3 写操作前置或 Phase 7 Activity",
+  "completedTodos": [
+    "Versions 页面使用 backendSnapshot.installedVersions；删除静态 localVersions；补测试；更新 Phase 4.1 文档勾选；Tauri dev + 浏览器检查通过；超时 explorer 已释放。"
+  ],
+  "activeSlice": "Phase 4.1 Version List",
+  "evidenceRefs": [
+    "pnpm test, pnpm build, cargo test, pnpm tauri dev, Browser Versions check"
+  ],
+  "blockedOn": null,
+  "nextStep": "下一切片建议做 Activity task center 基础记录模型，为写操作互斥和日志打底。",
+  "updatedAt": "2026-06-01"
+}

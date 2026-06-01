@@ -28,9 +28,9 @@ type StatusKey =
 
 type Version = {
   version: string;
-  npm: string;
-  path: string;
-  arch: string;
+  npm: string | null;
+  path: string | null;
+  arch: string | null;
   status: StatusKey[];
 };
 
@@ -72,37 +72,6 @@ const navigation: Array<{ id: Screen; icon: string }> = [
   { id: "projects", icon: "◇" },
   { id: "activity", icon: "≡" },
   { id: "settings", icon: "⚙" },
-];
-
-const localVersions: Version[] = [
-  {
-    version: "v22.11.0",
-    npm: "10.9.0",
-    path: "~/.nvm/versions/node/v22.11.0/bin/node",
-    arch: "arm64",
-    status: ["current", "lts"],
-  },
-  {
-    version: "v20.18.1",
-    npm: "10.8.2",
-    path: "~/.nvm/versions/node/v20.18.1/bin/node",
-    arch: "arm64",
-    status: ["default", "lts"],
-  },
-  {
-    version: "v18.20.4",
-    npm: "10.7.0",
-    path: "~/.nvm/versions/node/v18.20.4/bin/node",
-    arch: "x64",
-    status: ["project"],
-  },
-  {
-    version: "system",
-    npm: "9.8.1",
-    path: "/usr/local/bin/node",
-    arch: "arm64",
-    status: ["system", "issue"],
-  },
 ];
 
 const remoteVersions: RemoteVersion[] = [
@@ -567,6 +536,48 @@ function recommendedActions(snapshot: EnvironmentSummary, copy: Copy): HomeActio
     : copy.home.actions.map(([title, description]) => ({ title, description }));
 }
 
+function versionRows(snapshot: EnvironmentSummary, copy: Copy): Version[] {
+  return snapshot.installedVersions.map((version) => {
+    const status: StatusKey[] = [];
+    if (version.isCurrent) status.push("current");
+    if (version.isDefault || versionsMatch(version.version, snapshot.defaultVersion)) {
+      status.push("default");
+    }
+    if (version.isLts) status.push("lts");
+    if (version.isSystem) status.push("system");
+    if (status.length === 0) status.push("installed");
+
+    return {
+      version: version.version,
+      npm: version.npmVersion,
+      path: version.path,
+      arch: version.arch ?? snapshot.arch,
+      status,
+    };
+  }).concat(
+    snapshot.installedVersions.length === 0
+      ? [
+          {
+            version: copy.home.unavailable,
+            npm: null,
+            path: copy.home.unavailable,
+            arch: snapshot.arch,
+            status: ["missing"],
+          },
+        ]
+      : [],
+  );
+}
+
+function versionsMatch(left: string, right: string | null): boolean {
+  if (!right) return false;
+  return normalizeVersion(left) === normalizeVersion(right);
+}
+
+function normalizeVersion(version: string): string {
+  return version.trim().replace(/^v/, "");
+}
+
 function Chip({ label, tone = "neutral" }: { label: string; tone?: Tone }) {
   return <span className={`chip chip-${tone}`}>{label}</span>;
 }
@@ -684,24 +695,32 @@ function HomeScreen({
   );
 }
 
-function VersionsScreen({ copy }: { copy: Copy }) {
+function VersionsScreen({
+  copy,
+  snapshot,
+}: {
+  copy: Copy;
+  snapshot: EnvironmentSummary;
+}) {
+  const versions = versionRows(snapshot, copy);
+
   return (
     <section className="screen-stack">
       <SectionHeader eyebrow={copy.versions.eyebrow} title={copy.versions.title} />
       <div className="table-panel">
-        {localVersions.map((item) => (
+        {versions.map((item) => (
           <article className="version-row" key={item.version}>
             <div>
               <h3>{item.version}</h3>
-              <p>{item.path}</p>
+              <p>{item.path ?? copy.home.unavailable}</p>
             </div>
             <div className="chip-row">
               {item.status.map((status) => (
                 <Chip key={status} label={copy.status[status]} tone={statusTone(status)} />
               ))}
             </div>
-            <span className="mono">{item.npm}</span>
-            <span>{item.arch}</span>
+            <span className="mono">{item.npm ?? copy.home.unavailable}</span>
+            <span>{item.arch ?? copy.home.unavailable}</span>
             <div className="row-actions">
               <button
                 className="icon-button"
@@ -953,7 +972,7 @@ function App() {
   function renderScreen() {
     switch (activeScreen) {
       case "versions":
-        return <VersionsScreen copy={copy} />;
+        return <VersionsScreen copy={copy} snapshot={backendSnapshot} />;
       case "remote":
         return <RemoteScreen copy={copy} />;
       case "projects":
