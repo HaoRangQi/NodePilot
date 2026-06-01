@@ -112,16 +112,16 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 1.3 macOS/Linux `nvm-sh` Adapter
 
-- [ ] 检测 `NVM_DIR`。
-- [ ] 检测 `~/.nvm/nvm.sh`。
-- [ ] 检测 `~/.zshrc` 是否加载 nvm。
-- [ ] 检测 `~/.bashrc` 是否加载 nvm。
-- [ ] 检测 `~/.bash_profile` 是否加载 nvm。
-- [ ] 检测 `~/.profile` 是否加载 nvm。
-- [ ] 支持 `nvm --version`。
-- [ ] 支持 `nvm current`。
-- [ ] 支持 `nvm ls --no-colors`。
-- [ ] 支持 `nvm ls-remote --no-colors`。
+- [x] 检测 `NVM_DIR`。
+- [x] 检测 `~/.nvm/nvm.sh`。
+- [x] 检测 `~/.zshrc` 是否加载 nvm。
+- [x] 检测 `~/.bashrc` 是否加载 nvm。
+- [x] 检测 `~/.bash_profile` 是否加载 nvm。
+- [x] 检测 `~/.profile` 是否加载 nvm。
+- [x] 支持 `nvm --version`。
+- [x] 支持 `nvm current`。
+- [x] 支持 `nvm ls --no-colors`。
+- [x] 支持 `nvm ls-remote --no-colors`。
 - [ ] 支持 `nvm install`。
 - [ ] 支持 `nvm uninstall`。
 - [ ] 支持 `nvm use`，并标注只影响当前任务环境。
@@ -129,14 +129,14 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 1.4 Windows `nvm-windows` Adapter
 
-- [ ] 检测 `nvm.exe`。
-- [ ] 检测 `nvm version`。
-- [ ] 检测 `nvm current`。
-- [ ] 检测 `nvm root`。
-- [ ] 检测 `nvm arch`。
+- [x] 检测 `nvm.exe`。
+- [x] 检测 `nvm version`。
+- [x] 检测 `nvm current`。
+- [x] 检测 `nvm root`。
+- [x] 检测 `nvm arch`。
 - [ ] 检测管理员权限。
-- [ ] 支持 `nvm list`。
-- [ ] 支持 `nvm list available`。
+- [x] 支持 `nvm list`。
+- [x] 支持 `nvm list available`。
 - [ ] 支持 `nvm install <version> [arch]`。
 - [ ] 支持 `nvm uninstall <version>`。
 - [ ] 支持 `nvm use <version> [arch]`。

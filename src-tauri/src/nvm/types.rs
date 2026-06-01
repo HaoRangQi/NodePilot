@@ -29,6 +29,23 @@ pub struct CapabilitySet {
 }
 
 impl CapabilitySet {
+    pub fn missing() -> Self {
+        Self {
+            can_install: false,
+            can_uninstall: false,
+            can_activate: false,
+            can_set_default: false,
+            supports_alias: false,
+            supports_project_nvmrc: false,
+            supports_arch_selection: false,
+            supports_proxy: false,
+            supports_mirror: false,
+            supports_source_install: false,
+            supports_offline_install: false,
+            requires_admin_for_activation: false,
+        }
+    }
+
     pub fn nvm_sh() -> Self {
         Self {
             can_install: true,
@@ -118,6 +135,19 @@ pub struct HealthCheckItem {
 pub struct HealthCheckResult {
     pub backend: BackendKind,
     pub items: Vec<HealthCheckItem>,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct BackendDetection {
+    pub kind: BackendKind,
+    pub capabilities: CapabilitySet,
+    pub nvm_dir: Option<String>,
+    pub executable_path: Option<String>,
+    pub version: Option<String>,
+    pub root: Option<String>,
+    pub arch: Option<String>,
+    pub health: HealthCheckResult,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
