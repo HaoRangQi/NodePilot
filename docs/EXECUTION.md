@@ -32,7 +32,7 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 
 - [x] 已生成 Tauri 2 + React + Vite + TypeScript 脚手架。
 - [x] 已安装 pnpm 依赖并生成 `pnpm-lock.yaml`。
-- [ ] 已替换默认示例 UI。
+- [x] 已替换默认示例 UI。
 - [ ] 已实现任何 nvmUI 业务功能。
 - [ ] 已完成端到端验证。
 
@@ -71,16 +71,16 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [ ] 添加前端测试脚本 `pnpm test`。
 - [ ] 添加 Rust 单元测试入口。
 - [ ] 添加基础 parser 测试。
-- [ ] 确认 `pnpm build` 可运行。
-- [ ] 确认 `cargo test` 可运行。
-- [ ] 确认 `pnpm tauri dev` 可启动。
+- [x] 确认 `pnpm build` 可运行。
+- [x] 确认 `cargo test` 可运行。
+- [x] 确认 `pnpm tauri dev` 可启动。
 
 ### 0.4 Phase Verification
 
 - [ ] `pnpm test` 通过。
-- [ ] `pnpm build` 通过。
-- [ ] `cargo test` 通过。
-- [ ] `pnpm tauri dev` 能启动桌面窗口。
+- [x] `pnpm build` 通过。
+- [x] `cargo test` 通过。
+- [x] `pnpm tauri dev` 能启动桌面窗口。
 
 ## Phase 1: Backend Capability and Platform Adapters
 
@@ -506,39 +506,39 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 
 ### 9.1 Layout
 
-- [ ] 首屏直接进入 Home 管理界面。
-- [ ] 不做营销页。
-- [ ] 使用工具型布局。
-- [ ] 避免大面积装饰卡片。
-- [ ] 保持信息密度适合桌面端。
+- [x] 首屏直接进入 Home 管理界面。
+- [x] 不做营销页。
+- [x] 使用工具型布局。
+- [x] 避免大面积装饰卡片。
+- [x] 保持信息密度适合桌面端。
 
 ### 9.2 Material You / Material 3
 
-- [ ] 定义 Material 3 color tokens。
-- [ ] 定义 typography tokens。
-- [ ] 定义 shape tokens。
-- [ ] 定义 elevation tokens。
-- [ ] 支持 light/dark theme。
-- [ ] 配色不使用单一色相堆叠。
+- [x] 定义 Material 3 color tokens。
+- [x] 定义 typography tokens。
+- [x] 定义 shape tokens。
+- [x] 定义 elevation tokens。
+- [x] 支持 light/dark theme。
+- [x] 配色不使用单一色相堆叠。
 
 ### 9.3 Components
 
-- [ ] 状态 chip 包含文字，不只依赖颜色。
-- [ ] 危险操作使用低强调按钮。
+- [x] 状态 chip 包含文字，不只依赖颜色。
+- [x] 危险操作使用低强调按钮。
 - [ ] 危险操作必须 confirm dialog。
-- [ ] icon button 必须有 tooltip。
-- [ ] icon button 必须有 `aria-label`。
-- [ ] 日志使用 monospace。
-- [ ] 长日志不溢出布局。
+- [x] icon button 必须有 tooltip。
+- [x] icon button 必须有 `aria-label`。
+- [x] 日志使用 monospace。
+- [x] 长日志不溢出布局。
 
 ### 9.4 Responsive Desktop
 
-- [ ] 验证 960px 宽度。
-- [ ] 验证 1280px 宽度。
-- [ ] 验证 1440px 宽度。
-- [ ] 无文本重叠。
-- [ ] 无按钮文字截断。
-- [ ] 无空白主视图。
+- [x] 验证 960px 宽度。
+- [x] 验证 1280px 宽度。
+- [x] 验证 1440px 宽度。
+- [x] 无文本重叠。
+- [x] 无按钮文字截断。
+- [x] 无空白主视图。
 
 ## Phase 10: Release Readiness
 
@@ -589,4 +589,3 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [ ] README 描述安装方式。
 - [ ] README 描述已知限制。
 - [ ] README 描述故障排查。
-
