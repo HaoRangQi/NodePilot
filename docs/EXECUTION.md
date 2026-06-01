@@ -1,8 +1,8 @@
-# nvmUI Execution Document
+# NodePilot Execution Document
 
 ## Purpose
 
-nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它使用 Tauri 2、React、Vite、TypeScript 和 Material You / Material 3 工具型界面。
+NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。它使用 Tauri 2、React、Vite、TypeScript 和 Material You / Material 3 工具型界面。
 
 首版只做本地能力：
 
@@ -33,7 +33,7 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [x] 已生成 Tauri 2 + React + Vite + TypeScript 脚手架。
 - [x] 已安装 pnpm 依赖并生成 `pnpm-lock.yaml`。
 - [x] 已替换默认示例 UI。
-- [ ] 已实现任何 nvmUI 业务功能。
+- [ ] 已实现任何 NodePilot 业务功能。
 - [ ] 已完成端到端验证。
 
 ## Phase 0: Project Baseline
@@ -46,9 +46,9 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [x] 生成 `src-tauri/` Rust 工程。
 - [x] 生成 `package.json`、`vite.config.ts`、`tsconfig.json`。
 - [x] 生成 `pnpm-lock.yaml`。
-- [ ] 将 package 名称改为 `nvmui`。
-- [ ] 将 Tauri product name 改为 `nvmUI`。
-- [ ] 将 Tauri identifier 固定为 `app.nvmui.desktop`。
+- [x] 将 package 名称改为 `nodepilot`。
+- [x] 将 Tauri product name 改为 `NodePilot`。
+- [x] 将 Tauri identifier 固定为 `app.nodepilot.desktop`。
 
 ### 0.2 Directory Structure
 
@@ -488,12 +488,15 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [ ] 展示 default packages 内容。
 - [ ] 首版可只读。
 
-### 8.5 Appearance
+### 8.5 Appearance and Language
 
 - [ ] 支持 system theme。
-- [ ] 支持 light theme。
-- [ ] 支持 dark theme。
-- [ ] 保存主题选择到本地。
+- [x] 支持 light theme。
+- [x] 支持 dark theme。
+- [x] 保存主题选择到本地。
+- [x] 支持中文界面文案。
+- [x] 支持英文界面文案。
+- [x] 保存语言选择到本地。
 
 ### 8.6 Phase Verification
 
@@ -519,6 +522,8 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 - [x] 定义 shape tokens。
 - [x] 定义 elevation tokens。
 - [x] 支持 light/dark theme。
+- [x] 支持用户显式切换 light/dark theme。
+- [x] 支持中英文界面切换。
 - [x] 配色不使用单一色相堆叠。
 
 ### 9.3 Components
@@ -545,8 +550,8 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 ### 10.1 Automated Verification
 
 - [ ] `pnpm test` 通过。
-- [ ] `pnpm build` 通过。
-- [ ] `cargo test` 通过。
+- [x] `pnpm build` 通过。
+- [x] `cargo test` 通过。
 - [ ] `pnpm tauri build` 通过。
 
 ### 10.2 Manual macOS/Linux Verification
@@ -584,8 +589,8 @@ nvmUI 是一个本地桌面版 Node 版本与项目运行环境管理器。它�
 
 ### 10.5 Documentation
 
-- [ ] README 描述产品定位。
-- [ ] README 描述支持平台。
-- [ ] README 描述安装方式。
-- [ ] README 描述已知限制。
-- [ ] README 描述故障排查。
+- [x] README 描述产品定位。
+- [x] README 描述支持平台。
+- [x] README 描述安装方式。
+- [x] README 描述已知限制。
+- [x] README 描述故障排查。

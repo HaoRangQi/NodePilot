@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "tauri-app",
+  "productName": "NodePilot",
   "version": "0.1.0",
-  "identifier": "app.nvmui.desktop",
+  "identifier": "app.nodepilot.desktop",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -12,9 +12,9 @@
   "app": {
     "windows": [
       {
-        "title": "tauri-app",
-        "width": 800,
-        "height": 600
+        "title": "NodePilot",
+        "width": 1180,
+        "height": 760
       }
     ],
     "security": {
