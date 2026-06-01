@@ -33,7 +33,7 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 已生成 Tauri 2 + React + Vite + TypeScript 脚手架。
 - [x] 已安装 pnpm 依赖并生成 `pnpm-lock.yaml`。
 - [x] 已替换默认示例 UI。
-- [ ] 已实现任何 NodePilot 业务功能。
+- [x] 已实现 NodePilot backend 类型、parser 与测试基线。
 - [ ] 已完成端到端验证。
 
 ## Phase 0: Project Baseline
@@ -52,32 +52,32 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 0.2 Directory Structure
 
-- [ ] 创建 `src/features/home/`。
-- [ ] 创建 `src/features/versions/`。
-- [ ] 创建 `src/features/remote/`。
-- [ ] 创建 `src/features/projects/`。
-- [ ] 创建 `src/features/activity/`。
-- [ ] 创建 `src/features/settings/`。
-- [ ] 创建 `src/shared/api/`。
-- [ ] 创建 `src/shared/components/`。
-- [ ] 创建 `src/shared/types/`。
-- [ ] 创建 `src/styles/`。
-- [ ] 创建 `src-tauri/src/nvm/`。
-- [ ] 创建 `src-tauri/src/tasks/`。
+- [x] 创建 `src/features/home/`。
+- [x] 创建 `src/features/versions/`。
+- [x] 创建 `src/features/remote/`。
+- [x] 创建 `src/features/projects/`。
+- [x] 创建 `src/features/activity/`。
+- [x] 创建 `src/features/settings/`。
+- [x] 创建 `src/shared/api/`。
+- [x] 创建 `src/shared/components/`。
+- [x] 创建 `src/shared/types/`。
+- [x] 创建 `src/styles/`。
+- [x] 创建 `src-tauri/src/nvm/`。
+- [x] 创建 `src-tauri/src/tasks/`。
 
 ### 0.3 Testing Baseline
 
-- [ ] 添加前端测试框架。
-- [ ] 添加前端测试脚本 `pnpm test`。
-- [ ] 添加 Rust 单元测试入口。
-- [ ] 添加基础 parser 测试。
+- [x] 添加前端测试框架。
+- [x] 添加前端测试脚本 `pnpm test`。
+- [x] 添加 Rust 单元测试入口。
+- [x] 添加基础 parser 测试。
 - [x] 确认 `pnpm build` 可运行。
 - [x] 确认 `cargo test` 可运行。
 - [x] 确认 `pnpm tauri dev` 可启动。
 
 ### 0.4 Phase Verification
 
-- [ ] `pnpm test` 通过。
+- [x] `pnpm test` 通过。
 - [x] `pnpm build` 通过。
 - [x] `cargo test` 通过。
 - [x] `pnpm tauri dev` 能启动桌面窗口。
@@ -86,29 +86,29 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 1.1 Shared Backend Types
 
-- [ ] 定义 `BackendKind`：`NvmSh`、`NvmWindows`、`Missing`、`Unsupported`。
-- [ ] 定义 `CapabilitySet`。
-- [ ] 定义 `VersionInfo`。
-- [ ] 定义 `RemoteVersionInfo`。
-- [ ] 定义 `HealthCheckResult`。
-- [ ] 定义 `HealthCheckItem`。
-- [ ] 定义 `TaskStatus`。
-- [ ] 定义 `CommandResult`。
-- [ ] 定义 `InstallOptions`。
-- [ ] 定义 `ActivateOptions`。
+- [x] 定义 `BackendKind`：`NvmSh`、`NvmWindows`、`Missing`、`Unsupported`。
+- [x] 定义 `CapabilitySet`。
+- [x] 定义 `VersionInfo`。
+- [x] 定义 `RemoteVersionInfo`。
+- [x] 定义 `HealthCheckResult`。
+- [x] 定义 `HealthCheckItem`。
+- [x] 定义 `TaskStatus`。
+- [x] 定义 `CommandResult`。
+- [x] 定义 `InstallOptions`。
+- [x] 定义 `ActivateOptions`。
 
 ### 1.2 Backend Interface
 
-- [ ] 定义 `detect_backend()`。
-- [ ] 定义 `health_check()`。
-- [ ] 定义 `list_installed()`。
-- [ ] 定义 `list_remote()`。
-- [ ] 定义 `install()`。
-- [ ] 定义 `uninstall()`。
-- [ ] 定义 `activate()`。
-- [ ] 定义 `set_default()`。
-- [ ] 定义 `read_project_version()`。
-- [ ] 定义 `write_project_version()`。
+- [x] 定义 `detect_backend()`。
+- [x] 定义 `health_check()`。
+- [x] 定义 `list_installed()`。
+- [x] 定义 `list_remote()`。
+- [x] 定义 `install()`。
+- [x] 定义 `uninstall()`。
+- [x] 定义 `activate()`。
+- [x] 定义 `set_default()`。
+- [x] 定义 `read_project_version()`。
+- [x] 定义 `write_project_version()`。
 
 ### 1.3 macOS/Linux `nvm-sh` Adapter
 
@@ -144,37 +144,37 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 1.5 Capability Flags
 
-- [ ] `canInstall`。
-- [ ] `canUninstall`。
-- [ ] `canActivate`。
-- [ ] `canSetDefault`。
-- [ ] `supportsAlias`。
-- [ ] `supportsProjectNvmrc`。
-- [ ] `supportsArchSelection`。
-- [ ] `supportsProxy`。
-- [ ] `supportsMirror`。
-- [ ] `supportsSourceInstall`。
-- [ ] `supportsOfflineInstall`。
-- [ ] `requiresAdminForActivation`。
+- [x] `canInstall`。
+- [x] `canUninstall`。
+- [x] `canActivate`。
+- [x] `canSetDefault`。
+- [x] `supportsAlias`。
+- [x] `supportsProjectNvmrc`。
+- [x] `supportsArchSelection`。
+- [x] `supportsProxy`。
+- [x] `supportsMirror`。
+- [x] `supportsSourceInstall`。
+- [x] `supportsOfflineInstall`。
+- [x] `requiresAdminForActivation`。
 
 ### 1.6 Command Safety
 
-- [ ] 前端只传结构化参数，不传 shell 字符串。
-- [ ] 后端校验版本号。
-- [ ] 后端校验路径。
-- [ ] 后端校验 URL。
-- [ ] 后端拒绝 `;`、`&&`、`|`、反引号等 shell 注入字符。
-- [ ] 日志脱敏 token、auth header、secret。
+- [x] 前端只传结构化参数，不传 shell 字符串。
+- [x] 后端校验版本号。
+- [x] 后端校验路径。
+- [x] 后端校验 URL。
+- [x] 后端拒绝 `;`、`&&`、`|`、反引号等 shell 注入字符。
+- [x] 日志脱敏 token、auth header、secret。
 
 ### 1.7 Parser Tests
 
-- [ ] 测试解析 `nvm ls --no-colors`。
-- [ ] 测试解析 `nvm ls-remote --no-colors`。
-- [ ] 测试解析 `nvm current`。
-- [ ] 测试解析 `nvm alias default`。
-- [ ] 测试解析 `nvm-windows list`。
-- [ ] 测试解析 `nvm-windows list available`。
-- [ ] 测试失败输出不会被当作成功数据。
+- [x] 测试解析 `nvm ls --no-colors`。
+- [x] 测试解析 `nvm ls-remote --no-colors`。
+- [x] 测试解析 `nvm current`。
+- [x] 测试解析 `nvm alias default`。
+- [x] 测试解析 `nvm-windows list`。
+- [x] 测试解析 `nvm-windows list available`。
+- [x] 测试失败输出不会被当作成功数据。
 
 ## Phase 2: Home Environment Overview and Health Checks
 
@@ -549,7 +549,7 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 10.1 Automated Verification
 
-- [ ] `pnpm test` 通过。
+- [x] `pnpm test` 通过。
 - [x] `pnpm build` 通过。
 - [x] `cargo test` 通过。
 - [ ] `pnpm tauri build` 通过。
