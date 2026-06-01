@@ -1,10 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import App from "./App";
 import { MOCK_BACKEND_SNAPSHOT } from "./shared/api/backend";
 import type { EnvironmentSummary } from "./shared/types/backend";
 
 const getBackendSnapshotMock = vi.hoisted(() => vi.fn());
+const writeTextMock = vi.hoisted(() => vi.fn());
 
 vi.mock("./shared/api/backend", async () => {
   const actual = await vi.importActual<typeof import("./shared/api/backend")>("./shared/api/backend");
@@ -19,6 +20,14 @@ describe("App", () => {
   beforeEach(() => {
     localStorage.clear();
     localStorage.setItem("nodepilot.locale", "en-US");
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
+        writeText: writeTextMock,
+      },
+    });
+    writeTextMock.mockReset();
+    writeTextMock.mockResolvedValue(undefined);
     getBackendSnapshotMock.mockReset();
     getBackendSnapshotMock.mockResolvedValue(MOCK_BACKEND_SNAPSHOT);
   });
@@ -159,5 +168,56 @@ describe("App", () => {
     expect(screen.getAllByText("Not detected").length).toBeGreaterThan(0);
     expect(screen.getByText("system")).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "v18.20.4" })).not.toBeInTheDocument();
+  });
+
+  it("renders Activity task states, split logs, and redacted sensitive content", async () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Open Activity" }));
+
+    await waitFor(() => {
+      expect(screen.getByText("Detect environment")).toBeInTheDocument();
+    });
+    expect(screen.getByText("Remote refresh")).toBeInTheDocument();
+    expect(screen.getByText("Install version")).toBeInTheDocument();
+    expect(screen.getByText("Read .nvmrc")).toBeInTheDocument();
+    expect(screen.getByText("Set default")).toBeInTheDocument();
+    expect(screen.getByText("Success")).toBeInTheDocument();
+    expect(screen.getAllByText("Running").length).toBeGreaterThan(1);
+    expect(screen.getByText("Failed")).toBeInTheDocument();
+    expect(screen.getByText("Missing")).toBeInTheDocument();
+    expect(screen.getByText("Warn")).toBeInTheDocument();
+    expect(screen.getAllByText("stdout").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("stderr").length).toBeGreaterThan(0);
+    expect(
+      screen.getByText(
+        (_, element) =>
+          element?.tagName === "PRE" && (element.textContent?.includes("token=[REDACTED]") ?? false),
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        (_, element) =>
+          element?.tagName === "PRE" &&
+          (element.textContent?.includes("authorization: [REDACTED]") ?? false),
+      ),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("abc123")).not.toBeInTheDocument();
+    expect(screen.getByText("Exit code 3")).toBeInTheDocument();
+    expect(screen.getByText(/Recommended fix:/)).toBeInTheDocument();
+    expect(screen.getByText(/A write task is running/)).toBeInTheDocument();
+
+    const installTask = screen.getByText("Install version").closest("article");
+    expect(installTask).not.toBeNull();
+    fireEvent.click(within(installTask as HTMLElement).getByRole("button", { name: "Copy logs" }));
+    expect(writeTextMock).toHaveBeenCalledTimes(1);
+    const copiedLog = writeTextMock.mock.calls[0][0] as string;
+    expect(copiedLog).toContain("token=[REDACTED]");
+    expect(copiedLog).toContain("authorization: [REDACTED]");
+    expect(copiedLog).not.toContain("abc123");
+
+    fireEvent.click(screen.getAllByRole("button", { name: "Collapse logs" })[0]);
+
+    expect(screen.getByRole("button", { name: "Expand logs" })).toBeInTheDocument();
   });
 });

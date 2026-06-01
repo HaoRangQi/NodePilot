@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "frontend-build",
+  "type": "command",
+  "source": "pnpm build",
+  "summary": "TypeScript and Vite production build passed after Activity model/UI and index.html title update.",
+  "verifier": "terminal output 2026-06-01 23:40"
+}

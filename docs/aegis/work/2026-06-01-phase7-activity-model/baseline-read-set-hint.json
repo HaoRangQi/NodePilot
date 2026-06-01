@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "candidateDocs": [
+    "docs/EXECUTION.md Phase 7",
+    "src/App.tsx ActivityScreen",
+    "src-tauri/src/nvm/safety.rs redaction behavior"
+  ],
+  "whyRelevant": "执行文档定义勾选标准；ActivityScreen 是 UI owner；Rust safety 提供脱敏规则参考。",
+  "missingAuthority": []
+}

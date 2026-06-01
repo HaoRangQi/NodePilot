@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "affectedLayers": [
+    "frontend-task-model"
+  ],
+  "owners": [
+    "NodePilot Activity task center"
+  ],
+  "invariants": [
+    "日志不得展示 token/auth header/secret；前端仍不直接执行 shell；真实写操作未实现。"
+  ],
+  "compatBoundary": "只做本地模型和 UI，不接真实 install/uninstall/use/default 执行。",
+  "nonGoals": [
+    "真实任务取消、真实进程管理、后端持久化、真实写操作互斥执行器。"
+  ]
+}

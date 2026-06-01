@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase7-activity-model",
+  "currentTodo": "完成 activity 本地模型和 UI；真实 runner 待后续接入",
+  "completedTodos": [
+    "ActivityTask 类型、状态、读写访问模型",
+    "Activity UI 展示状态、耗时、stdout/stderr、退出码和失败修复建议",
+    "日志复制、折叠和敏感信息脱敏",
+    "前端写操作互斥判断和只读并行判断",
+    "docs/EXECUTION.md Phase 7 状态更新"
+  ],
+  "activeSlice": "Phase 7 Activity 基础模型",
+  "evidenceRefs": [
+    "docs/aegis/work/2026-06-01-phase7-activity-model/evidence-bundle-draft-frontend-tests.json",
+    "docs/aegis/work/2026-06-01-phase7-activity-model/evidence-bundle-draft-frontend-build.json",
+    "docs/aegis/work/2026-06-01-phase7-activity-model/evidence-bundle-draft-rust-tests.json",
+    "docs/aegis/work/2026-06-01-phase7-activity-model/evidence-bundle-draft-ui-activity-check.json"
+  ],
+  "blockedOn": null,
+  "nextStep": "接入真实 backend task runner、任务持久化和真实写操作互斥执行器。",
+  "updatedAt": "2026-06-01"
+}

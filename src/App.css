@@ -568,11 +568,48 @@ pre {
   padding: 16px;
 }
 
+.activity-notice {
+  padding: 12px 14px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  color: var(--md-sys-color-on-warning-container);
+  background: var(--md-sys-color-warning-container);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 19px;
+}
+
 .activity-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
+}
+
+.activity-summary {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.log-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.log-block {
+  display: grid;
+  min-width: 0;
+  gap: 6px;
+}
+
+.log-block > span {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 pre {
@@ -704,5 +741,9 @@ pre {
 
   .project-row .button-tonal {
     display: none;
+  }
+
+  .log-grid {
+    grid-template-columns: 1fr;
   }
 }

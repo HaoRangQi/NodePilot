@@ -1,0 +1,18 @@
+export type StatusKey =
+  | "current"
+  | "default"
+  | "lts"
+  | "project"
+  | "system"
+  | "issue"
+  | "latest"
+  | "installed"
+  | "available"
+  | "ready"
+  | "needsInstall"
+  | "ok"
+  | "warn"
+  | "missing"
+  | "success"
+  | "failed"
+  | "running";

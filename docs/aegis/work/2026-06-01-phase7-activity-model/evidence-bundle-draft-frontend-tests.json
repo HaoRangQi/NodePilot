@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "frontend-tests",
+  "type": "command",
+  "source": "pnpm test",
+  "summary": "Vitest passed: 3 files / 12 tests. Activity UI test covers task states, stdout/stderr split logs, log collapse, copy logs, and sensitive log redaction.",
+  "verifier": "terminal output 2026-06-01 23:40"
+}

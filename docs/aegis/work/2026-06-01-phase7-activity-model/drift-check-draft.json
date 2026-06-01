@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "taskId": "2026-06-01-phase7-activity-model",
+  "taskIntentRef": "docs/aegis/work/2026-06-01-phase7-activity-model/task-intent-draft.json",
+  "baselineRefs": [
+    "docs/EXECUTION.md Phase 7",
+    "src/App.tsx ActivityScreen",
+    "src-tauri/src/nvm/safety.rs redaction behavior"
+  ],
+  "scopeStatus": "aligned-with-intent",
+  "compatStatus": "bounded-to-frontend-model",
+  "retirementStatus": "no-retirement-required",
+  "newRiskSignals": [
+    "不能把静态 mock 当真实后端任务；写操作互斥只能先实现模型规则，不能声称真实写操作已接入。"
+  ],
+  "decision": "continue"
+}

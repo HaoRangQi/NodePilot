@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "aegis.schema.v0",
+  "artifactKey": "ui-activity-check",
+  "type": "browser",
+  "source": "Browser viewport checks at http://localhost:1420/ Activity",
+  "summary": "Activity screen checked at 960, 1280, and 1440 px. No horizontal overflow, no out-of-viewport controls, title is NodePilot, write-lock notice is visible, 12 log blocks are present, redacted token is visible, raw token is absent.",
+  "verifier": "browser output 2026-06-01 23:37"
+}

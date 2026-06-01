@@ -1,30 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { getBackendSnapshot, MOCK_BACKEND_SNAPSHOT } from "./shared/api/backend";
+import {
+  canStartTask,
+  durationLabel,
+  redactLog,
+  taskStatusKey,
+  type ActivityTask,
+} from "./shared/activity/model";
 import type { EnvironmentSummary, HealthCheckItem, TaskStatus } from "./shared/types/backend";
+import type { StatusKey } from "./shared/types/ui";
 import "./App.css";
 
 type Screen = "home" | "versions" | "remote" | "projects" | "activity" | "settings";
 type Tone = "success" | "warning" | "danger" | "info" | "neutral";
 type Theme = "light" | "dark";
 type Locale = "zh-CN" | "en-US";
-type StatusKey =
-  | "current"
-  | "default"
-  | "lts"
-  | "project"
-  | "system"
-  | "issue"
-  | "latest"
-  | "installed"
-  | "available"
-  | "ready"
-  | "needsInstall"
-  | "ok"
-  | "warn"
-  | "missing"
-  | "success"
-  | "failed"
-  | "running";
 
 type Version = {
   version: string;
@@ -46,14 +36,6 @@ type Project = {
   path: string;
   nvmrc: string;
   state: StatusKey;
-};
-
-type ActivityItem = {
-  actionKey: "healthCheck" | "remoteRefresh" | "applyProject";
-  status: "success" | "failed" | "running";
-  time: string;
-  command: string;
-  output: string;
 };
 
 type HomeAction = {
@@ -103,27 +85,96 @@ const projects: Project[] = [
   },
 ];
 
-const activity: ActivityItem[] = [
+const activityTasks: ActivityTask[] = [
   {
-    actionKey: "healthCheck",
+    id: "task-detect-1",
+    type: "detect",
+    title: "Detect backend",
     status: "success",
-    time: "14:08",
+    access: "read",
+    startedAt: "2026-06-01T14:08:00.000Z",
+    endedAt: "2026-06-01T14:08:02.400Z",
     command: "detect backend and current node",
-    output: "backend=nvm-sh current=v22.11.0 default=v20.18.1",
+    stdout: "backend=nvm-sh\ncurrent=v22.11.0\ndefault=v20.18.1",
+    stderr: "",
+    exitCode: 0,
+    summary: "Backend and current Node detected.",
+    recommendation: null,
   },
   {
-    actionKey: "remoteRefresh",
+    id: "task-remote-1",
+    type: "remote_refresh",
+    title: "Refresh remote releases",
     status: "running",
-    time: "14:06",
+    access: "read",
+    startedAt: "2026-06-01T14:06:00.000Z",
+    endedAt: null,
     command: "nvm ls-remote --no-colors",
-    output: "Fetching Node release index from configured mirror...",
+    stdout: "Fetching Node release index from configured mirror...",
+    stderr: "",
+    exitCode: null,
+    summary: "Remote refresh is still running.",
+    recommendation: null,
   },
   {
-    actionKey: "applyProject",
+    id: "task-install-1",
+    type: "install",
+    title: "Install project version",
     status: "failed",
-    time: "13:52",
-    command: "nvm use",
-    output: "Found .nvmrc with version lts/*\nRequested version is not installed locally.",
+    access: "write",
+    startedAt: "2026-06-01T13:52:00.000Z",
+    endedAt: "2026-06-01T13:52:04.200Z",
+    command: "nvm install lts/*",
+    stdout: "Found .nvmrc with version lts/*\ntoken=abc123",
+    stderr: "Requested version is not installed locally.\nAuthorization: Bearer abc",
+    exitCode: 3,
+    summary: "Requested project version is not installed.",
+    recommendation: "Install the requested LTS line, then apply the project version again.",
+  },
+  {
+    id: "task-project-read-1",
+    type: "project_nvmrc_read",
+    title: "Read project .nvmrc",
+    status: "cancelled",
+    access: "read",
+    startedAt: "2026-06-01T13:45:00.000Z",
+    endedAt: "2026-06-01T13:45:01.000Z",
+    command: "read .nvmrc",
+    stdout: "",
+    stderr: "User cancelled directory selection.",
+    exitCode: null,
+    summary: "Project scan was cancelled.",
+    recommendation: null,
+  },
+  {
+    id: "task-activate-running",
+    type: "activate",
+    title: "Use version",
+    status: "running",
+    access: "write",
+    startedAt: "2026-06-01T13:44:30.000Z",
+    endedAt: null,
+    command: "nvm use v22.11.0",
+    stdout: "Switching this task shell to v22.11.0...",
+    stderr: "",
+    exitCode: null,
+    summary: "A write operation is applying the selected version.",
+    recommendation: null,
+  },
+  {
+    id: "task-default-queued",
+    type: "set_default",
+    title: "Set default version",
+    status: "pending",
+    access: "write",
+    startedAt: "2026-06-01T13:44:00.000Z",
+    endedAt: null,
+    command: "nvm alias default v22.11.0",
+    stdout: "",
+    stderr: "",
+    exitCode: null,
+    summary: "Waiting for the running write task to finish.",
+    recommendation: null,
   },
 ];
 
@@ -243,12 +294,28 @@ const translations = {
       eyebrow: "活动",
       title: "任务日志",
       actionNames: {
-        healthCheck: "健康检查",
-        remoteRefresh: "刷新远程列表",
-        applyProject: "应用项目版本",
+        detect: "检测环境",
+        health_check: "健康检查",
+        remote_refresh: "刷新远程列表",
+        install: "安装版本",
+        uninstall: "卸载版本",
+        activate: "使用版本",
+        set_default: "设置默认版本",
+        project_nvmrc_read: "读取 .nvmrc",
+        project_nvmrc_write: "写入 .nvmrc",
       },
-      repair:
-        "推荐：先安装 .nvmrc 请求的 LTS 版本，然后再次应用项目版本。",
+      stdout: "stdout",
+      stderr: "stderr",
+      exitCode: "退出码",
+      duration: "耗时",
+      access: "访问",
+      read: "只读",
+      write: "写操作",
+      copyLogs: "复制日志",
+      collapseLogs: "折叠日志",
+      expandLogs: "展开日志",
+      writeLockActive: "写操作正在运行，新的写操作会排队；只读操作允许并行。",
+      repair: "推荐修复",
     },
     settings: {
       backendEyebrow: "Backend",
@@ -388,12 +455,28 @@ const translations = {
       eyebrow: "Activity",
       title: "Task log",
       actionNames: {
-        healthCheck: "Health check",
-        remoteRefresh: "Remote refresh",
-        applyProject: "Apply project version",
+        detect: "Detect environment",
+        health_check: "Health check",
+        remote_refresh: "Remote refresh",
+        install: "Install version",
+        uninstall: "Uninstall version",
+        activate: "Use version",
+        set_default: "Set default",
+        project_nvmrc_read: "Read .nvmrc",
+        project_nvmrc_write: "Write .nvmrc",
       },
-      repair:
-        "Recommended: install the requested LTS line, then apply the project version again.",
+      stdout: "stdout",
+      stderr: "stderr",
+      exitCode: "Exit code",
+      duration: "Duration",
+      access: "Access",
+      read: "Read",
+      write: "Write",
+      copyLogs: "Copy logs",
+      collapseLogs: "Collapse logs",
+      expandLogs: "Expand logs",
+      writeLockActive: "A write task is running. New write tasks queue; read tasks may run in parallel.",
+      repair: "Recommended fix",
     },
     settings: {
       backendEyebrow: "Backend",
@@ -816,24 +899,90 @@ function ProjectsScreen({ copy }: { copy: Copy }) {
   );
 }
 
+function logBlock(label: string, value: string) {
+  return (
+    <div className="log-block">
+      <span>{label}</span>
+      <pre>{redactLog(value || "(empty)")}</pre>
+    </div>
+  );
+}
+
+function formatTaskLogs(copy: Copy, task: ActivityTask): string {
+  return [
+    `${copy.activity.actionNames[task.type]} · ${task.command}`,
+    `${copy.activity.stdout}\n${redactLog(task.stdout || "(empty)")}`,
+    `${copy.activity.stderr}\n${redactLog(task.stderr || "(empty)")}`,
+  ].join("\n\n");
+}
+
+function copyTaskLogs(copy: Copy, task: ActivityTask) {
+  if (!navigator.clipboard) return;
+  void navigator.clipboard.writeText(formatTaskLogs(copy, task));
+}
+
 function ActivityScreen({ copy }: { copy: Copy }) {
+  const [collapsedTasks, setCollapsedTasks] = useState<string[]>([]);
+  const writeLockActive = !canStartTask(activityTasks, "write");
+
+  function isCollapsed(taskId: string) {
+    return collapsedTasks.includes(taskId);
+  }
+
+  function toggleLogs(taskId: string) {
+    setCollapsedTasks((current) =>
+      current.includes(taskId)
+        ? current.filter((value) => value !== taskId)
+        : [...current, taskId],
+    );
+  }
+
   return (
     <section className="screen-stack">
       <SectionHeader eyebrow={copy.activity.eyebrow} title={copy.activity.title} />
+      {writeLockActive && <div className="activity-notice">{copy.activity.writeLockActive}</div>}
       <div className="activity-list">
-        {activity.map((item) => (
-          <article className="activity-card" key={`${item.actionKey}-${item.time}`}>
+        {activityTasks.map((item) => (
+          <article className="activity-card" key={item.id}>
             <div className="activity-header">
               <div>
-                <h3>{copy.activity.actionNames[item.actionKey]}</h3>
+                <h3>{copy.activity.actionNames[item.type]}</h3>
                 <p>
-                  {item.time} · {item.command}
+                  {item.command} · {copy.activity.duration}: {durationLabel(item)} ·{" "}
+                  {copy.activity.access}: {item.access === "read" ? copy.activity.read : copy.activity.write}
                 </p>
               </div>
-              <Chip label={copy.status[item.status]} tone={statusTone(item.status)} />
+              <div className="chip-row">
+                <Chip
+                  label={copy.status[taskStatusKey(item.status)]}
+                  tone={statusTone(taskStatusKey(item.status))}
+                />
+                {item.exitCode !== null && (
+                  <Chip label={`${copy.activity.exitCode} ${item.exitCode}`} tone="neutral" />
+                )}
+              </div>
             </div>
-            <pre>{item.output}</pre>
-            {item.status === "failed" && <div className="repair-note">{copy.activity.repair}</div>}
+            <p className="activity-summary">{item.summary}</p>
+            <div className="row-actions">
+              <button className="button-muted" type="button" onClick={() => copyTaskLogs(copy, item)}>
+                {copy.activity.copyLogs}
+              </button>
+              <button className="button-tonal" type="button" onClick={() => toggleLogs(item.id)}>
+                {isCollapsed(item.id) ? copy.activity.expandLogs : copy.activity.collapseLogs}
+              </button>
+            </div>
+            {!isCollapsed(item.id) && (
+              <div className="log-grid">
+                {logBlock(copy.activity.stdout, item.stdout)}
+                {logBlock(copy.activity.stderr, item.stderr)}
+              </div>
+            )}
+            {item.status === "failed" && (
+              <div className="repair-note">
+                <strong>{copy.activity.repair}: </strong>
+                {item.recommendation ?? item.summary}
+              </div>
+            )}
           </article>
         ))}
       </div>

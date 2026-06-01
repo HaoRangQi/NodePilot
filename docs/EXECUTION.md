@@ -408,53 +408,66 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ## Phase 7: Activity Task Center
 
+当前状态：已完成前端本地基础模型、mock UI 和单测覆盖；真实后端任务 runner、持久化任务日志和真实操作自动入队待后续接入。
+
 ### 7.1 Task Types
 
-- [ ] 记录 detect。
-- [ ] 记录 health_check。
-- [ ] 记录 remote_refresh。
-- [ ] 记录 install。
-- [ ] 记录 uninstall。
-- [ ] 记录 activate。
-- [ ] 记录 set_default。
-- [ ] 记录 project_nvmrc_read。
-- [ ] 记录 project_nvmrc_write。
+- [x] 定义并可展示 detect 任务类型。
+- [x] 定义并可展示 health_check 任务类型。
+- [x] 定义并可展示 remote_refresh 任务类型。
+- [x] 定义并可展示 install 任务类型。
+- [x] 定义并可展示 uninstall 任务类型。
+- [x] 定义并可展示 activate 任务类型。
+- [x] 定义并可展示 set_default 任务类型。
+- [x] 定义并可展示 project_nvmrc_read 任务类型。
+- [x] 定义并可展示 project_nvmrc_write 任务类型。
+- [ ] 真实 detect 操作自动进入 Activity。
+- [ ] 真实 health_check 操作自动进入 Activity。
+- [ ] 真实 remote_refresh 操作自动进入 Activity。
+- [ ] 真实 install 操作自动进入 Activity。
+- [ ] 真实 uninstall 操作自动进入 Activity。
+- [ ] 真实 activate 操作自动进入 Activity。
+- [ ] 真实 set_default 操作自动进入 Activity。
+- [ ] 真实 project_nvmrc_read 操作自动进入 Activity。
+- [ ] 真实 project_nvmrc_write 操作自动进入 Activity。
 
 ### 7.2 Task State
 
-- [ ] 支持 pending。
-- [ ] 支持 running。
-- [ ] 支持 success。
-- [ ] 支持 failed。
-- [ ] 支持 cancelled。
-- [ ] 记录开始时间。
-- [ ] 记录结束时间。
-- [ ] 记录耗时。
+- [x] 支持 pending。
+- [x] 支持 running。
+- [x] 支持 success。
+- [x] 支持 failed。
+- [x] 支持 cancelled。
+- [x] 记录开始时间。
+- [x] 记录结束时间。
+- [x] 记录耗时。
 
 ### 7.3 Logs
 
-- [ ] stdout 分区展示。
-- [ ] stderr 分区展示。
-- [ ] 日志可复制。
-- [ ] 日志可折叠。
-- [ ] 失败任务展示摘要。
-- [ ] 失败任务展示退出码。
-- [ ] 失败任务展示推荐修复动作。
+- [x] stdout 分区展示。
+- [x] stderr 分区展示。
+- [x] 日志可复制。
+- [x] 日志可折叠。
+- [x] 失败任务展示摘要。
+- [x] 失败任务展示退出码。
+- [x] 失败任务展示推荐修复动作。
 
 ### 7.4 Safety
 
-- [ ] 写操作全局互斥。
-- [ ] 只读操作允许并行。
-- [ ] 日志脱敏 token。
-- [ ] 日志脱敏 auth header。
-- [ ] 日志脱敏 secret。
+- [x] 前端任务模型支持写操作互斥判断。
+- [x] 前端任务模型允许只读操作并行。
+- [ ] 真实任务 runner 强制写操作全局互斥。
+- [ ] 真实任务 runner 允许只读操作并行。
+- [x] 日志脱敏 token。
+- [x] 日志脱敏 auth header。
+- [x] 日志脱敏 secret。
 
 ### 7.5 Phase Verification
 
-- [ ] 验证成功任务。
-- [ ] 验证失败任务。
-- [ ] 验证取消任务。
-- [ ] 验证敏感信息脱敏。
+- [x] 验证成功任务。
+- [x] 验证失败任务。
+- [x] 验证取消任务。
+- [x] 验证敏感信息脱敏。
 
 ## Phase 8: Settings and Configuration
 
