@@ -1,0 +1,56 @@
+{
+  "verification": "tauri-dev-bridge",
+  "title": "`tauri dev` bridge",
+  "executedAt": "2026-06-03T13:55:21.082Z",
+  "hostPlatform": "darwin",
+  "command": [
+    "node",
+    "./scripts/verify-tauri-dev-bridge.mjs"
+  ],
+  "exitCode": 0,
+  "status": "success",
+  "coverage": [
+    "真实 `tauri dev` 桌面窗口启动",
+    "manual UI bridge `navigate`",
+    "manual UI bridge `click nav`",
+    "manual UI bridge `read-project`",
+    "项目 `.nvmrc` 读取链路接到真实桌面窗口"
+  ],
+  "notCovered": [
+    "`install nvm`",
+    "`list remote`",
+    "`install Node`",
+    "`activate Node`",
+    "`set default`",
+    "`uninstall Node`",
+    "桌面窗口视觉布局",
+    "双平台完整人工验收"
+  ],
+  "report": {
+    "devUrl": "http://localhost:1420/",
+    "snapshotPath": "/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-tauri-bridge-JW0P80/MANUAL-UI-SNAPSHOT.json",
+    "commandPath": "/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-tauri-bridge-JW0P80/MANUAL-UI-COMMAND.json",
+    "commandResultPath": "/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-tauri-bridge-JW0P80/MANUAL-UI-COMMAND-RESULT.json",
+    "desktopProcessStarted": true,
+    "steps": [
+      {
+        "step": "navigate versions",
+        "ok": true,
+        "detail": "screen=versions"
+      },
+      {
+        "step": "click settings nav",
+        "ok": true,
+        "detail": "screen=settings"
+      },
+      {
+        "step": "read project",
+        "ok": true,
+        "detail": "screen=projects, project=/private/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-tauri-bridge-JW0P80/project, version=v24.16.0"
+      }
+    ],
+    "cleanupAttempted": true,
+    "recentOutput": "     Running BeforeDevCommand (`pnpm dev`)\n$ vite\n\n  VITE v7.3.3  ready in 134 ms\n\n  ➜  Local:   http://localhost:1420/\n     Running DevCommand (`cargo  run --no-default-features --color always --`)\n        Info Watching /Users/macos/Downloads/Projects/nvmUI/src-tauri for changes...\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s\n     Running `target/debug/nodepilot`\n"
+  },
+  "fileName": "2026-06-03-tauri-dev-bridge.json"
+}

@@ -117,13 +117,13 @@ button {
   width: 48px;
   height: 48px;
   place-items: center;
-  border-radius: 16px;
-  color: var(--md-sys-color-on-primary);
-  background: var(--md-sys-color-primary);
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 1;
-  box-shadow: var(--md-sys-elevation-level2);
+  filter: drop-shadow(var(--md-sys-elevation-level2));
+}
+
+.brand-mark img {
+  display: block;
+  width: 48px;
+  height: 48px;
 }
 
 .navigation-rail nav {
@@ -369,6 +369,28 @@ button {
   line-height: 20px;
 }
 
+.check-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.check-copy span {
+  min-width: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.check-copy small {
+  min-width: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  line-height: 18px;
+  white-space: normal;
+  word-break: break-word;
+}
+
 .action-button {
   display: grid;
   gap: 3px;
@@ -537,6 +559,34 @@ pre {
   font-size: 14px;
 }
 
+.search-box::placeholder {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.toolbar-secondary {
+  justify-content: space-between;
+}
+
+.toolbar-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.toolbar-select {
+  min-width: 128px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(112, 121, 118, 0.32);
+  border-radius: 999px;
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container-low);
+  font: inherit;
+}
+
 .remote-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(150px, 1fr));
@@ -552,6 +602,10 @@ pre {
 
 .remote-card button {
   justify-self: start;
+}
+
+.remote-empty {
+  grid-column: 1 / -1;
 }
 
 .project-row {
@@ -691,6 +745,100 @@ pre {
   font-size: 14px;
   font-weight: 720;
   line-height: 20px;
+}
+
+.field-stack {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field-stack label {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  font-weight: 760;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.text-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid rgba(112, 121, 118, 0.32);
+  border-radius: var(--md-sys-shape-corner-medium);
+  color: var(--md-sys-color-on-surface);
+  background: var(--md-sys-color-surface-container);
+  font: inherit;
+}
+
+.text-input:focus {
+  outline: 2px solid color-mix(in srgb, var(--md-sys-color-primary) 42%, transparent);
+  outline-offset: 1px;
+}
+
+.text-area {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--md-sys-color-on-surface);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.checkbox-row input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--md-sys-color-primary);
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.dialog-panel {
+  display: grid;
+  gap: 14px;
+  width: min(480px, calc(100vw - 40px));
+  padding: 20px;
+  border: 1px solid rgba(112, 121, 118, 0.18);
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.dialog-panel h2 {
+  margin: 0;
+  color: var(--md-sys-color-on-surface);
+  font-size: 20px;
+  font-weight: 740;
+  line-height: 28px;
+}
+
+.dialog-panel p {
+  margin: 0;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 1180px) {

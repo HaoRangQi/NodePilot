@@ -1,0 +1,32 @@
+{
+  "verification": "tauri-dev-smoke",
+  "title": "`tauri dev` smoke",
+  "executedAt": "2026-06-03T15:24:21.718Z",
+  "hostPlatform": "darwin",
+  "command": [
+    "node",
+    "./scripts/verify-tauri-dev-smoke.mjs"
+  ],
+  "exitCode": 0,
+  "status": "success",
+  "coverage": [
+    "`pnpm tauri dev` 启动",
+    "`http://localhost:1420/` 可用",
+    "桌面进程拉起",
+    "开发进程自动清理"
+  ],
+  "notCovered": [
+    "真实界面交互",
+    "桌面窗口视觉布局",
+    "多视图人工验收"
+  ],
+  "report": {
+    "devUrl": "http://localhost:1420/",
+    "desktopProcessStarted": true,
+    "responseStatus": 200,
+    "responseHasRootMount": true,
+    "cleanupAttempted": true,
+    "recentOutput": "     Running BeforeDevCommand (`pnpm dev`)\n$ vite\n\n  VITE v7.3.3  ready in 110 ms\n\n  ➜  Local:   http://localhost:1420/\n     Running DevCommand (`cargo  run --no-default-features --color always --`)\n        Info Watching /Users/macos/Downloads/Projects/nvmUI/src-tauri for changes...\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.38s\n     Running `target/debug/nodepilot`\n"
+  },
+  "fileName": "2026-06-03-tauri-dev-smoke.json"
+}

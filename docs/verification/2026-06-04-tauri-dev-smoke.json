@@ -1,0 +1,32 @@
+{
+  "verification": "tauri-dev-smoke",
+  "title": "`tauri dev` smoke",
+  "executedAt": "2026-06-03T16:43:52.211Z",
+  "hostPlatform": "darwin",
+  "command": [
+    "node",
+    "./scripts/verify-tauri-dev-smoke.mjs"
+  ],
+  "exitCode": 0,
+  "status": "success",
+  "coverage": [
+    "`pnpm tauri dev` 启动",
+    "`http://localhost:1420/` 可用",
+    "桌面进程拉起",
+    "开发进程自动清理"
+  ],
+  "notCovered": [
+    "真实界面交互",
+    "桌面窗口视觉布局",
+    "多视图人工验收"
+  ],
+  "report": {
+    "devUrl": "http://localhost:1420/",
+    "desktopProcessStarted": true,
+    "responseStatus": 200,
+    "responseHasRootMount": true,
+    "cleanupAttempted": true,
+    "recentOutput": "     Running BeforeDevCommand (`pnpm dev`)\n     Running DevCommand (`cargo  run --no-default-features --color always --`)\n        Info Watching /Users/macos/Downloads/Projects/nvmUI/src-tauri for changes...\n    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s\n     Running `target/debug/nodepilot`\n$ vite\nerror when starting dev server:\nError: Port 1420 is already in use\n    at Server.onError$1 (file:///Users/macos/Downloads/Projects/nvmUI/node_modules/.pnpm/vite@7.3.3/node_modules/vite/dist/node/chunks/config.js:14949:28)\n    at Server.emit (node:events:508:28)\n    at emitErrorNT (node:net:1976:8)\n    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)\n       Error The \"beforeDevCommand\" terminated with a non-zero status code.\n"
+  },
+  "fileName": "2026-06-04-tauri-dev-smoke.json"
+}

@@ -31,6 +31,15 @@ pub fn validate_path(input: &str) -> Result<(), String> {
     reject_shell_meta(trimmed)
 }
 
+pub fn validate_arch(input: &str) -> Result<(), String> {
+    let trimmed = input.trim();
+    reject_shell_meta(trimmed)?;
+    match trimmed {
+        "32" | "64" | "all" => Ok(()),
+        _ => Err(format!("unsupported architecture selector: {trimmed}")),
+    }
+}
+
 pub fn validate_url(input: &str) -> Result<(), String> {
     let trimmed = input.trim();
     reject_shell_meta(trimmed)?;
@@ -116,6 +125,15 @@ mod tests {
         ] {
             assert!(validate_version(input).is_err(), "{input}");
         }
+    }
+
+    #[test]
+    fn validates_supported_arch_values() {
+        for arch in ["32", "64", "all"] {
+            assert!(validate_arch(arch).is_ok(), "{arch}");
+        }
+        assert!(validate_arch("arm64").is_err());
+        assert!(validate_arch("64 && echo nope").is_err());
     }
 
     #[test]

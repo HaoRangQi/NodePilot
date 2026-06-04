@@ -1,0 +1,107 @@
+{
+  "verification": "nvm-sh-e2e",
+  "title": "`nvm-sh` e2e",
+  "executedAt": "2026-06-03T16:43:52.211Z",
+  "hostPlatform": "darwin",
+  "command": [
+    "cargo",
+    "run",
+    "--manifest-path",
+    "src-tauri/Cargo.toml",
+    "--bin",
+    "verify_nvm_sh_e2e"
+  ],
+  "exitCode": 0,
+  "status": "success",
+  "coverage": [
+    "`install nvm`",
+    "`detect`",
+    "`list remote`",
+    "`install Node`",
+    "`list installed`",
+    "`activate Node`",
+    "`set default`",
+    "`write .nvmrc`",
+    "`read .nvmrc`",
+    "`apply .nvmrc`",
+    "`uninstall Node`"
+  ],
+  "notCovered": [
+    "真实桌面 UI 交互",
+    "桌面窗口视觉布局",
+    "多视图人工验收"
+  ],
+  "report": {
+    "temp_root": "/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000",
+    "project_dir": "/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/project",
+    "target_version": "v24.16.0",
+    "steps": [
+      {
+        "step": "install nvm",
+        "ok": true,
+        "detail": "Installed nvm-sh into /var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/home/.nvm"
+      },
+      {
+        "step": "detect",
+        "ok": true,
+        "detail": "kind=nvm-sh, version=0.40.4, nvm_dir=/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/home/.nvm"
+      },
+      {
+        "step": "list remote",
+        "ok": true,
+        "detail": "Loaded 847 remote versions, target v24.16.0"
+      },
+      {
+        "step": "install Node",
+        "ok": true,
+        "detail": "Installed v24.16.0"
+      },
+      {
+        "step": "list installed",
+        "ok": true,
+        "detail": "Installed versions: 1"
+      },
+      {
+        "step": "activate Node",
+        "ok": true,
+        "detail": "nvm use v24.16.0 succeeded in the task shell"
+      },
+      {
+        "step": "set default",
+        "ok": true,
+        "detail": "default alias -> v24.16.0"
+      },
+      {
+        "step": "write .nvmrc",
+        "ok": true,
+        "detail": "version=v24.16.0, path=/private/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/project/.nvmrc"
+      },
+      {
+        "step": "read .nvmrc",
+        "ok": true,
+        "detail": "version=v24.16.0, path=/private/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/project/.nvmrc"
+      },
+      {
+        "step": "apply .nvmrc",
+        "ok": true,
+        "detail": "Applied v24.16.0 from /private/var/folders/ms/jmdzxw6d0jxg51dmkxf84wgw0000gn/T/nodepilot-nvm-sh-e2e-1780505034483366000/project/.nvmrc"
+      },
+      {
+        "step": "reset default",
+        "ok": true,
+        "detail": "Reset default alias to system before uninstall"
+      },
+      {
+        "step": "uninstall Node",
+        "ok": true,
+        "detail": "Uninstalled v24.16.0"
+      },
+      {
+        "step": "verify uninstall",
+        "ok": true,
+        "detail": "v24.16.0 is absent from installed versions"
+      }
+    ]
+  },
+  "fileName": "2026-06-04-nvm-sh-e2e.json"
+}

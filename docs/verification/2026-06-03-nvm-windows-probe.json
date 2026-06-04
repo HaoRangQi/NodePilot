@@ -1,0 +1,41 @@
+{
+  "verification": "nvm-windows-probe",
+  "title": "`nvm-windows` probe",
+  "executedAt": "2026-06-03T15:24:21.718Z",
+  "hostPlatform": "darwin",
+  "command": [
+    "cargo",
+    "run",
+    "--manifest-path",
+    "src-tauri/Cargo.toml",
+    "--bin",
+    "verify_nvm_windows_probe"
+  ],
+  "exitCode": 0,
+  "status": "skipped",
+  "coverage": [
+    "probe binary 编译 / 运行路径",
+    "非 Windows 宿主的 skip contract"
+  ],
+  "notCovered": [
+    "Windows 实机 `detect`",
+    "`list installed`",
+    "`list available`",
+    "`install`",
+    "`use`",
+    "`uninstall`"
+  ],
+  "report": {
+    "platform": "macos",
+    "write_enabled": false,
+    "target_version": null,
+    "steps": [
+      {
+        "step": "platform",
+        "ok": false,
+        "detail": "verify_nvm_windows_probe only performs real checks on Windows; current platform is non-Windows."
+      }
+    ]
+  },
+  "fileName": "2026-06-03-nvm-windows-probe.json"
+}

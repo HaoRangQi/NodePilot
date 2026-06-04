@@ -58,6 +58,7 @@ pub fn parse_nvm_ls(stdout: &str) -> Result<Vec<VersionInfo>, String> {
         let mut info = VersionInfo::new(version);
         info.is_current = line.contains("->");
         info.is_lts = trimmed.to_ascii_lowercase().contains("lts");
+        info.line = parse_lts_line(trimmed);
         versions.push(info);
     }
 
@@ -186,6 +187,13 @@ default -> v20.18.1
         assert!(versions
             .iter()
             .any(|version| version.version == "system" && version.is_system));
+        assert_eq!(
+            versions
+                .iter()
+                .find(|version| version.version == "v22.11.0")
+                .and_then(|version| version.line.as_deref()),
+            Some("Jod")
+        );
     }
 
     #[test]

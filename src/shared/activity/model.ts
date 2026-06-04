@@ -4,6 +4,7 @@ export type ActivityTaskType =
   | "detect"
   | "health_check"
   | "remote_refresh"
+  | "install_backend"
   | "install"
   | "uninstall"
   | "activate"
@@ -21,6 +22,9 @@ export type ActivityTask = {
   title: string;
   status: ActivityTaskStatus;
   access: ActivityAccess;
+  backendTaskId: string | null;
+  cancelable: boolean;
+  cancelRequested: boolean;
   startedAt: string;
   endedAt: string | null;
   command: string;
@@ -42,7 +46,7 @@ export function taskStatusKey(status: ActivityTaskStatus): StatusKey {
     case "failed":
       return "failed";
     case "cancelled":
-      return "missing";
+      return "cancelled";
   }
 }
 

@@ -13,6 +13,9 @@ const baseTask: ActivityTask = {
   title: "Detect backend",
   status: "success",
   access: "read",
+  backendTaskId: null,
+  cancelable: false,
+  cancelRequested: false,
   startedAt: "2026-06-01T10:00:00.000Z",
   endedAt: "2026-06-01T10:00:02.400Z",
   command: "detect backend",
@@ -29,7 +32,7 @@ describe("activity model", () => {
     expect(taskStatusKey("running")).toBe("running");
     expect(taskStatusKey("success")).toBe("success");
     expect(taskStatusKey("failed")).toBe("failed");
-    expect(taskStatusKey("cancelled")).toBe("missing");
+    expect(taskStatusKey("cancelled")).toBe("cancelled");
   });
 
   it("formats task duration", () => {

@@ -34,8 +34,10 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 已安装 pnpm 依赖并生成 `pnpm-lock.yaml`。
 - [x] 已替换默认示例 UI。
 - [x] 已实现 NodePilot backend 类型、parser 与测试基线。
-- [x] Home 已接入 Tauri 只读环境摘要并保留 mock fallback。
-- [ ] 已完成端到端验证。
+- [x] 前端已接入 Tauri backend 命令，并在不可用时保留 mock fallback。
+- [x] 已提供 macOS / Linux、Windows 手工验收准备脚本、结果模板、标记命令、回填命令与快速指引。
+- [x] 已将非首发必要的未完成项迁移到 [`docs/PHASE2.md`](./PHASE2.md)。
+- [ ] 已完成端到端验证。（原因：当前已完成自动化验证、打包验证，以及隔离环境下的 `nvm-sh` backend 实机脚本验证；其余非阻塞项已迁入 `docs/PHASE2.md`，但 macOS / Linux、Windows 的逐项桌面 UI 人工验收还未完成。）
 
 ## Phase 0: Project Baseline
 
@@ -123,10 +125,10 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 支持 `nvm current`。
 - [x] 支持 `nvm ls --no-colors`。
 - [x] 支持 `nvm ls-remote --no-colors`。
-- [ ] 支持 `nvm install`。
-- [ ] 支持 `nvm uninstall`。
-- [ ] 支持 `nvm use`，并标注只影响当前任务环境。
-- [ ] 支持 `nvm alias default`。
+- [x] 支持 `nvm install`。
+- [x] 支持 `nvm uninstall`。
+- [x] 支持 `nvm use`，并标注只影响当前任务环境。
+- [x] 支持 `nvm alias default`。
 
 ### 1.4 Windows `nvm-windows` Adapter
 
@@ -135,13 +137,13 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 检测 `nvm current`。
 - [x] 检测 `nvm root`。
 - [x] 检测 `nvm arch`。
-- [ ] 检测管理员权限。
+- [x] 检测管理员权限。
 - [x] 支持 `nvm list`。
 - [x] 支持 `nvm list available`。
-- [ ] 支持 `nvm install <version> [arch]`。
-- [ ] 支持 `nvm uninstall <version>`。
-- [ ] 支持 `nvm use <version> [arch]`。
-- [ ] 标注 Windows 切换会更新全局 symlink。
+- [x] 支持 `nvm install <version> [arch]`。
+- [x] 支持 `nvm uninstall <version>`。
+- [x] 支持 `nvm use <version> [arch]`。
+- [x] 标注 Windows 切换会更新全局 symlink。
 
 ### 1.5 Capability Flags
 
@@ -213,10 +215,10 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 检测 nvm 已安装但未加载。
 - [x] 检测 Node PATH 不来自 nvm。
 - [x] 检测 npm prefix 冲突。
-- [ ] 检测 Windows 管理员权限不足。
-- [ ] 检测 Windows 旧 Node 安装冲突。
-- [ ] 检测 Apple Silicon 安装旧版本风险。
-- [ ] 检测 `.nvmrc` 指向版本未安装。
+- [x] 检测 Windows 管理员权限不足。
+- [x] 检测 Windows 旧 Node 安装冲突。
+- [x] 检测 Apple Silicon 安装旧版本风险。
+- [x] 检测 `.nvmrc` 指向版本未安装。
 - [x] 检测 default 指向版本不存在。
 
 ### 2.5 Recommended Actions
@@ -224,56 +226,56 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 未安装 nvm 时推荐安装。
 - [x] default 缺失时推荐设置 default。
 - [x] PATH 冲突时推荐修复路径。
-- [ ] `.nvmrc` 与当前版本不一致时推荐应用项目版本。
-- [ ] 权限不足时推荐重新以管理员权限运行或手动操作。
+- [x] `.nvmrc` 与当前版本不一致时推荐应用项目版本。
+- [x] 权限不足时推荐重新以管理员权限运行或手动操作。
 
 ### 2.6 Phase Verification
 
 - [x] 模拟正常状态。
 - [x] 模拟 nvm 未安装状态。
 - [x] 模拟 PATH 冲突状态。
-- [ ] 模拟 Windows 权限不足状态。
+- [x] 模拟 Windows 权限不足状态。
 
 ## Phase 3: nvm Installation and Initialization
 
 ### 3.1 Missing nvm Flow
 
-- [ ] 未检测到 nvm 时显示安装引导。
-- [ ] 安装引导说明将安装哪个 backend。
-- [ ] 安装引导显示官方来源。
-- [ ] 安装前必须要求用户确认。
+- [x] 未检测到 nvm 时显示安装引导。
+- [x] 安装引导说明将安装哪个 backend。
+- [x] 安装引导显示官方来源。
+- [x] 安装前必须要求用户确认。
 
 ### 3.2 macOS/Linux Install Flow
 
-- [ ] 展示官方安装脚本 URL。
-- [ ] 展示将执行的命令。
-- [ ] 展示目标路径。
-- [ ] 用户确认后执行。
-- [ ] 显示实时日志。
-- [ ] 安装后重新检测 backend。
-- [ ] 提示用户重新打开 shell 或 source profile。
+- [x] 展示官方安装脚本 URL。
+- [x] 展示将执行的命令。
+- [x] 展示目标路径。
+- [x] 用户确认后执行。
+- [x] 显示实时日志。
+- [x] 安装后重新检测 backend。
+- [x] 提示用户重新打开 shell 或 source profile。
 
 ### 3.3 Windows Install Flow
 
-- [ ] 引导下载 `nvm-windows` installer。
-- [ ] 提示需要管理员权限。
-- [ ] 不做静默安装。
-- [ ] 安装后重新检测 `nvm.exe`。
-- [ ] 检测 PATH 是否生效。
+- [x] 引导下载 `nvm-windows` installer。
+- [x] 提示需要管理员权限。
+- [x] 不做静默安装。
+- [x] 安装后重新检测 `nvm.exe`。
+- [x] 检测 PATH 是否生效。
 
 ### 3.4 Install Failure Handling
 
-- [ ] 显示失败退出码。
-- [ ] 显示 stdout。
-- [ ] 显示 stderr。
-- [ ] 提供复制日志按钮。
-- [ ] 给出下一步修复建议。
+- [x] 显示失败退出码。
+- [x] 显示 stdout。
+- [x] 显示 stderr。
+- [x] 提供复制日志按钮。
+- [x] 给出下一步修复建议。
 
 ### 3.5 Phase Verification
 
-- [ ] 验证 nvm 缺失场景。
-- [ ] 验证安装失败场景。
-- [ ] 验证安装成功后重新检测。
+- [x] 验证 nvm 缺失场景。
+- [x] 验证安装失败场景。
+- [x] 验证安装成功后重新检测。
 
 ## Phase 4: Local Versions
 
@@ -287,128 +289,128 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 展示架构。
 - [x] 展示安装路径。
 - [x] 展示 npm 版本，若可获得。
-- [ ] 展示损坏或缺失状态，若检测到。
+- [x] 展示损坏或缺失状态，若检测到。
 
 ### 4.2 Version Actions
 
-- [ ] 使用此版本。
-- [ ] 设为默认版本。
-- [ ] 卸载版本。
-- [ ] 复制版本号。
-- [ ] 打开安装目录。
-- [ ] 查看版本详情。
+- [x] 使用此版本。
+- [x] 设为默认版本。
+- [x] 卸载版本。
+- [x] 复制版本号。
+- [x] 打开安装目录。
+- [x] 查看版本详情。
 
 ### 4.3 Deletion Protection
 
-- [ ] 删除当前版本前二次确认。
-- [ ] 删除默认版本前二次确认。
-- [ ] 删除最后一个 nvm 管理版本前二次确认。
-- [ ] 删除失败时显示原因和建议。
+- [x] 删除当前版本前二次确认。
+- [x] 删除默认版本前二次确认。
+- [x] 删除最后一个 nvm 管理版本前二次确认。
+- [x] 删除失败时显示原因和建议。
 
 ### 4.4 Version Details
 
-- [ ] 展示 Node 路径。
-- [ ] 展示 npm 路径。
-- [ ] 展示 global package 路径。
-- [ ] 展示 `node -v` 验证结果。
-- [ ] 展示 `npm -v` 验证结果。
+- [x] 展示 Node 路径。
+- [x] 展示 npm 路径。
+- [x] 展示 global package 路径。
+- [x] 展示 `node -v` 验证结果。
+- [x] 展示 `npm -v` 验证结果。
 
 ### 4.5 Phase Verification
 
 - [x] 验证多个本地版本渲染。
-- [ ] 验证切换版本。
-- [ ] 验证设置 default。
-- [ ] 验证卸载版本。
-- [ ] 验证操作后刷新状态。
+- [x] 验证切换版本。
+- [x] 验证设置 default。
+- [x] 验证卸载版本。
+- [x] 验证操作后刷新状态。
 
 ## Phase 5: Remote Versions
 
 ### 5.1 Remote List
 
-- [ ] 拉取远程版本列表。
-- [ ] 展示远程刷新时间。
-- [ ] 缓存远程列表。
-- [ ] 支持手动刷新。
-- [ ] 远程失败时展示错误。
+- [x] 拉取远程版本列表。
+- [x] 展示远程刷新时间。
+- [x] 缓存远程列表。
+- [x] 支持手动刷新。
+- [x] 远程失败时展示错误。
 
 ### 5.2 Filters
 
-- [ ] 筛选 LTS。
-- [ ] 筛选 latest。
-- [ ] 按 major 筛选。
-- [ ] 筛选已安装。
-- [ ] 筛选未安装。
-- [ ] 按版本号搜索。
+- [x] 筛选 LTS。
+- [x] 筛选 latest。
+- [x] 按 major 筛选。
+- [x] 筛选已安装。
+- [x] 筛选未安装。
+- [x] 按版本号搜索。
 
 ### 5.3 Install Actions
 
-- [ ] 安装 latest。
-- [ ] 安装 latest LTS。
-- [ ] 安装指定版本。
-- [ ] 安装某个 major 的最新 patch。
-- [ ] 安装完成后刷新本地版本。
+- [x] 安装 latest。
+- [x] 安装 latest LTS。
+- [x] 安装指定版本。
+- [x] 安装某个 major 的最新 patch。
+- [x] 安装完成后刷新本地版本。
 
 ### 5.4 Install Options
 
-- [ ] 迁移 global packages from current。
-- [ ] 迁移 global packages from default。
-- [ ] 安装 latest npm。
-- [ ] 离线安装，若 backend 支持。
-- [ ] 从源码编译，若 backend 支持。
-- [ ] Windows 架构选择：system、32、64、all。
+- [x] 迁移 global packages from current。
+- [x] 迁移 global packages from default。
+- [x] 安装 latest npm。
+- [ ] 离线安装，若 backend 支持。（原因：当前首版支持范围内的 `nvm-sh` 与 `nvm-windows` capability 均未提供 offline install；该项已转入 [`docs/PHASE2.md`](./PHASE2.md)，不阻塞首版交付。）
+- [x] 从源码编译，若 backend 支持。
+- [x] Windows 架构选择：system、32、64、all。
 
 ### 5.5 Task Control
 
-- [ ] 安装任务显示实时日志。
-- [ ] 安装任务可取消。
-- [ ] 写操作互斥。
-- [ ] 重复点击防抖。
+- [x] 安装任务显示实时日志。
+- [x] 安装任务可取消。
+- [x] 写操作互斥。
+- [x] 重复点击防抖。
 
 ### 5.6 Phase Verification
 
-- [ ] 验证远程列表失败。
-- [ ] 验证安装成功。
-- [ ] 验证取消安装。
-- [ ] 验证重复点击不会创建重复任务。
+- [x] 验证远程列表失败。
+- [x] 验证安装成功。
+- [x] 验证取消安装。
+- [x] 验证重复点击不会创建重复任务。
 
 ## Phase 6: Projects and `.nvmrc`
 
 ### 6.1 Project Selection
 
-- [ ] 支持选择项目目录。
-- [ ] 保存最近项目列表。
-- [ ] 最近项目只保存在本地。
-- [ ] 支持打开项目目录。
+- [x] 支持选择项目目录。
+- [x] 保存最近项目列表。
+- [x] 最近项目只保存在本地。
+- [x] 支持打开项目目录。
 
 ### 6.2 `.nvmrc` Detection
 
-- [ ] 读取当前目录 `.nvmrc`。
-- [ ] 向父目录查找 `.nvmrc`。
-- [ ] 展示 `.nvmrc` 文件路径。
-- [ ] 展示 `.nvmrc` 内容。
-- [ ] 校验 `.nvmrc` 是否合法。
-- [ ] 检查 `.nvmrc` 指向版本是否已安装。
+- [x] 读取当前目录 `.nvmrc`。
+- [x] 向父目录查找 `.nvmrc`。
+- [x] 展示 `.nvmrc` 文件路径。
+- [x] 展示 `.nvmrc` 内容。
+- [x] 校验 `.nvmrc` 是否合法。
+- [x] 检查 `.nvmrc` 指向版本是否已安装。
 
 ### 6.3 Project Actions
 
-- [ ] 按 `.nvmrc` 安装版本。
-- [ ] 按 `.nvmrc` 应用版本。
-- [ ] 创建 `.nvmrc`。
-- [ ] 修改 `.nvmrc`。
-- [ ] 写入前展示 diff。
-- [ ] 写入前要求确认。
-- [ ] 复制推荐命令。
+- [x] 按 `.nvmrc` 安装版本。
+- [x] 按 `.nvmrc` 应用版本。
+- [x] 创建 `.nvmrc`。
+- [x] 修改 `.nvmrc`。
+- [x] 写入前展示 diff。
+- [x] 写入前要求确认。
+- [x] 复制推荐命令。
 
 ### 6.4 Phase Verification
 
-- [ ] 验证无 `.nvmrc`。
-- [ ] 验证合法 `.nvmrc`。
-- [ ] 验证版本未安装。
-- [ ] 验证父目录继承。
+- [x] 验证无 `.nvmrc`。
+- [x] 验证合法 `.nvmrc`。
+- [x] 验证版本未安装。
+- [x] 验证父目录继承。
 
 ## Phase 7: Activity Task Center
 
-当前状态：已完成前端本地基础模型、mock UI 和单测覆盖；真实后端任务 runner、持久化任务日志和真实操作自动入队待后续接入。
+当前状态：已完成前端本地基础模型、mock UI 和单测覆盖；真实 detect、health_check、remote_refresh、install、uninstall、activate、set_default、project `.nvmrc` read/write 已自动进入 Activity。真实任务 runner 已限制写操作串行，并允许只读操作并行；持久化任务日志仍待后续接入。
 
 ### 7.1 Task Types
 
@@ -421,15 +423,15 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] 定义并可展示 set_default 任务类型。
 - [x] 定义并可展示 project_nvmrc_read 任务类型。
 - [x] 定义并可展示 project_nvmrc_write 任务类型。
-- [ ] 真实 detect 操作自动进入 Activity。
-- [ ] 真实 health_check 操作自动进入 Activity。
-- [ ] 真实 remote_refresh 操作自动进入 Activity。
-- [ ] 真实 install 操作自动进入 Activity。
-- [ ] 真实 uninstall 操作自动进入 Activity。
-- [ ] 真实 activate 操作自动进入 Activity。
-- [ ] 真实 set_default 操作自动进入 Activity。
-- [ ] 真实 project_nvmrc_read 操作自动进入 Activity。
-- [ ] 真实 project_nvmrc_write 操作自动进入 Activity。
+- [x] 真实 detect 操作自动进入 Activity。
+- [x] 真实 health_check 操作自动进入 Activity。
+- [x] 真实 remote_refresh 操作自动进入 Activity。
+- [x] 真实 install 操作自动进入 Activity。
+- [x] 真实 uninstall 操作自动进入 Activity。
+- [x] 真实 activate 操作自动进入 Activity。
+- [x] 真实 set_default 操作自动进入 Activity。
+- [x] 真实 project_nvmrc_read 操作自动进入 Activity。
+- [x] 真实 project_nvmrc_write 操作自动进入 Activity。
 
 ### 7.2 Task State
 
@@ -456,8 +458,8 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 - [x] 前端任务模型支持写操作互斥判断。
 - [x] 前端任务模型允许只读操作并行。
-- [ ] 真实任务 runner 强制写操作全局互斥。
-- [ ] 真实任务 runner 允许只读操作并行。
+- [x] 真实任务 runner 强制写操作全局互斥。
+- [x] 真实任务 runner 允许只读操作并行。
 - [x] 日志脱敏 token。
 - [x] 日志脱敏 auth header。
 - [x] 日志脱敏 secret。
@@ -473,38 +475,38 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 8.1 Backend Settings
 
-- [ ] 展示 backend 类型。
-- [ ] 展示 nvm 版本。
-- [ ] 展示 nvm 路径。
-- [ ] 展示 Node 版本存储路径。
-- [ ] Windows 展示 symlink/root 信息。
+- [x] 展示 backend 类型。
+- [x] 展示 nvm 版本。
+- [x] 展示 nvm 路径。
+- [x] 展示 Node 版本存储路径。
+- [x] Windows 展示 symlink/root 信息。
 
 ### 8.2 Shell Integration
 
-- [ ] 展示 `.zshrc` 检测结果。
-- [ ] 展示 `.bashrc` 检测结果。
-- [ ] 展示 `.bash_profile` 检测结果。
-- [ ] 展示 `.profile` 检测结果。
-- [ ] 支持复制 shell 集成片段。
-- [ ] 不默认修改用户 profile。
+- [x] 展示 `.zshrc` 检测结果。
+- [x] 展示 `.bashrc` 检测结果。
+- [x] 展示 `.bash_profile` 检测结果。
+- [x] 展示 `.profile` 检测结果。
+- [x] 支持复制 shell 集成片段。
+- [x] 不默认修改用户 profile。
 
 ### 8.3 Mirrors and Proxy
 
-- [ ] 展示 Node mirror。
-- [ ] 展示 npm mirror。
-- [ ] 展示 proxy。
-- [ ] 首版以只读为主。
-- [ ] 编辑功能单独进入后续阶段。
+- [x] 展示 Node mirror。
+- [x] 展示 npm mirror。
+- [x] 展示 proxy。
+- [x] 首版以只读为主。
+- [ ] 编辑功能单独进入后续阶段。（原因：首版按只读配置范围交付，mirror / proxy 编辑已转入 [`docs/PHASE2.md`](./PHASE2.md)，不阻塞首版交付。）
 
 ### 8.4 Default Packages
 
-- [ ] 检测 `$NVM_DIR/default-packages`。
-- [ ] 展示 default packages 内容。
-- [ ] 首版可只读。
+- [x] 检测 `$NVM_DIR/default-packages`。
+- [x] 展示 default packages 内容。
+- [x] 首版可只读。
 
 ### 8.5 Appearance and Language
 
-- [ ] 支持 system theme。
+- [x] 支持 system theme。
 - [x] 支持 light theme。
 - [x] 支持 dark theme。
 - [x] 保存主题选择到本地。
@@ -514,10 +516,10 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 8.6 Phase Verification
 
-- [ ] 验证配置缺失。
-- [ ] 验证配置存在。
-- [ ] 验证权限不足。
-- [ ] 验证路径异常。
+- [x] 验证配置缺失。
+- [x] 验证配置存在。
+- [x] 验证权限不足。
+- [x] 验证路径异常。
 
 ## Phase 9: UI and Interaction Acceptance
 
@@ -544,7 +546,7 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 - [x] 状态 chip 包含文字，不只依赖颜色。
 - [x] 危险操作使用低强调按钮。
-- [ ] 危险操作必须 confirm dialog。
+- [x] 危险操作必须 confirm dialog。
 - [x] icon button 必须有 tooltip。
 - [x] icon button 必须有 `aria-label`。
 - [x] 日志使用 monospace。
@@ -566,9 +568,17 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 - [x] `pnpm test` 通过。
 - [x] `pnpm build` 通过。
 - [x] `cargo test` 通过。
-- [ ] `pnpm tauri build` 通过。
+- [x] `pnpm tauri build` 通过。
+
+补充说明：仓库已提供 `pnpm verify:all` 作为发布前自动回归入口；同时提供 `pnpm verify:artifacts`，顺序执行 `pnpm verify:tauri-dev:smoke`、`pnpm verify:nvm-sh:e2e` 与 `pnpm verify:nvm-windows:probe`，并把结果写入 `docs/verification/`。另外提供 `pnpm verify:tauri-dev:smoke`，用于单独自动验证 `pnpm tauri dev` 的启动与清理链路；提供 `pnpm verify:tauri-dev:bridge`，作为可选辅助脚本尝试验证真实桌面窗口里的 `navigate / click nav / read-project` 受控链路；提供 `pnpm verify:manual:nvm-sh:prep` 与 `pnpm verify:manual:nvm-windows:prep`，用于生成双平台的手工验收准备材料，并生成结果模板与 checklist；提供 `pnpm verify:manual:mark <MANUAL-RESULT.json> <item...>`，用于逐项标记手工验收结果；提供 `pnpm verify:manual:sync <MANUAL-RESULT.json>`，用于把逐项手工验收结果稳定回填到执行文档；提供 `pnpm verify:release:candidate`，用于串行执行 `pnpm verify:all` 并一次性生成双平台手工验收包与统一的 `RELEASE-CANDIDATE.md` / `RELEASE-CANDIDATE.json` 摘要。相关操作入口见 [`docs/manual/README.md`](./manual/README.md)。这组脚本都不替代下面的桌面 UI / 人工验收项；历史目录中若存在 `tauri-dev-bridge` 产物，也只表示曾单独运行过辅助脚本，不属于默认自动化证据。
+
+自动化验证产物已落盘到 [`docs/verification/README.md`](./verification/README.md)，其中包含最近一次 `nvm-sh` e2e 与 `nvm-windows` probe 的结果快照。
 
 ### 10.2 Manual macOS/Linux Verification
+
+辅助说明：可先运行 `pnpm verify:manual:nvm-sh:prep`，生成临时 `HOME/NVM_DIR`、测试项目目录、自动化前置脚本与日志、launcher、结果模板与 checklist；逐项完成后，再运行 `pnpm verify:manual:sync <MANUAL-RESULT.json>` 回填勾选状态。
+
+在执行人工验收前，建议先确认 [`docs/verification/README.md`](./verification/README.md) 中最近一次 `tauri-dev-smoke` 与 `nvm-sh-e2e` 已通过。当前默认自动化链已经覆盖 `install nvm`、`detect`、`list remote`、`install Node`、`list installed`、`activate Node`、`set default`、`read/apply .nvmrc`、`uninstall Node` 的 backend 语义，以及 `tauri dev` 启动与清理链路；因此 `10.2` 的人工验收重点只看桌面写操作结果承载、Activity 日志、错误反馈，以及 macOS/Linux 作用范围文案。`pnpm verify:tauri-dev:bridge` 仍可单独作为辅助脚本使用，但当前不作为默认自动化证据。
 
 - [ ] detect。
 - [ ] install nvm。
@@ -583,6 +593,10 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 10.3 Manual Windows Verification
 
+辅助说明：可先运行 `pnpm verify:manual:nvm-windows:prep`，生成自动化前置脚本与日志、`PowerShell helper`、结果模板和 UI checklist，再到真实 Windows 主机执行下列人工验收；逐项完成后，再运行 `pnpm verify:manual:sync <MANUAL-RESULT.json>` 回填勾选状态。
+
+在执行人工验收前，建议先确认 [`docs/verification/README.md`](./verification/README.md) 与 `pnpm verify:nvm-windows:probe` 的输出。当前自动化链已经覆盖 probe binary 编译 / 运行路径，以及非 Windows 宿主上的 skip contract；在真实 Windows 主机上，还可进一步辅助验证 `detect / list / install / use / uninstall` 的 backend 读写链路。因此 `10.3` 的人工验收重点只看 NodePilot 的桌面 UI 是否正确反映 `nvm-windows` 状态、install/use/uninstall 后是否刷新、admin 权限提示是否在正确时机出现，以及 arch 选择是否按预期暴露。
+
 - [ ] detect `nvm-windows`。
 - [ ] list installed。
 - [ ] list available。
@@ -594,12 +608,12 @@ NodePilot 是一个本地桌面版 Node 版本与项目运行环境管理器。�
 
 ### 10.4 Product Constraints
 
-- [ ] 无账号系统。
-- [ ] 无云同步。
-- [ ] 无遥测。
-- [ ] 无商业化入口。
-- [ ] 无团队管理。
-- [ ] 所有数据只保存在本机。
+- [x] 无账号系统。
+- [x] 无云同步。
+- [x] 无遥测。
+- [x] 无商业化入口。
+- [x] 无团队管理。
+- [x] 所有数据只保存在本机。
 
 ### 10.5 Documentation
 

@@ -1,4 +1,4 @@
-use std::process::Command;
+use std::process::{Child, Command, Stdio};
 
 use crate::tasks::TaskStatus;
 
@@ -11,6 +11,7 @@ use super::{
 pub struct SafeCommand {
     program: String,
     args: Vec<String>,
+    program_context: Option<String>,
 }
 
 impl SafeCommand {
@@ -21,11 +22,12 @@ impl SafeCommand {
         Self {
             program: program.into(),
             args: args.into_iter().map(Into::into).collect(),
+            program_context: None,
         }
     }
 
     pub fn run(&self) -> CommandResult<String> {
-        match Command::new(&self.program).args(&self.args).output() {
+        match self.command().output() {
             Ok(output) => {
                 let stdout = redact_sensitive(&String::from_utf8_lossy(&output.stdout));
                 let stderr = redact_sensitive(&String::from_utf8_lossy(&output.stderr));
@@ -45,7 +47,7 @@ impl SafeCommand {
                         stdout,
                         stderr,
                         exit_code: output.status.code(),
-                        message: Some(format!("command failed: {}", self.program)),
+                        message: Some(format!("command failed: {}", self.program())),
                     }
                 }
             }
@@ -55,9 +57,31 @@ impl SafeCommand {
                 stdout: String::new(),
                 stderr: redact_sensitive(&error.to_string()),
                 exit_code: None,
-                message: Some(format!("failed to start command: {}", self.program)),
+                message: Some(format!("failed to start command: {}", self.program())),
             },
         }
+    }
+
+    pub fn spawn(&self) -> std::io::Result<Child> {
+        self.command()
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+    }
+
+    pub fn program(&self) -> &str {
+        self.program_context.as_deref().unwrap_or(&self.program)
+    }
+
+    pub fn with_program_context(mut self, program_context: impl Into<String>) -> Self {
+        self.program_context = Some(program_context.into());
+        self
+    }
+
+    fn command(&self) -> Command {
+        let mut command = Command::new(&self.program);
+        command.args(&self.args);
+        command
     }
 }
 
@@ -88,6 +112,27 @@ pub fn map_output<T>(
             status,
             data: None,
             stdout: data.unwrap_or(result.stdout),
+            stderr: result.stderr,
+            exit_code: result.exit_code,
+            message: result.message,
+        },
+    }
+}
+
+pub fn into_unit_result(result: CommandResult<String>) -> CommandResult<()> {
+    match result.status {
+        TaskStatus::Success => CommandResult {
+            status: TaskStatus::Success,
+            data: Some(()),
+            stdout: result.stdout,
+            stderr: result.stderr,
+            exit_code: result.exit_code,
+            message: result.message,
+        },
+        status => CommandResult {
+            status,
+            data: None,
+            stdout: result.stdout,
             stderr: result.stderr,
             exit_code: result.exit_code,
             message: result.message,

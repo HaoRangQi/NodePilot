@@ -8,10 +8,22 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "verify:release:candidate": "node ./scripts/prepare-release-candidate.mjs",
+    "verify:manual:nvm-sh:prep": "node ./scripts/prepare-manual-nvm-sh-verification.mjs",
+    "verify:manual:nvm-windows:prep": "node ./scripts/prepare-manual-nvm-windows-verification.mjs",
+    "verify:manual:mark": "node ./scripts/mark-manual-verification-item.mjs",
+    "verify:manual:sync": "node ./scripts/sync-manual-verification-report.mjs",
+    "verify:all": "node ./scripts/verify-all.mjs",
+    "verify:artifacts": "node ./scripts/collect-verification-artifacts.mjs",
+    "verify:tauri-dev:smoke": "node ./scripts/verify-tauri-dev-smoke.mjs",
+    "verify:tauri-dev:bridge": "node ./scripts/verify-tauri-dev-bridge.mjs",
+    "verify:nvm-sh:e2e": "cargo run --manifest-path src-tauri/Cargo.toml --bin verify_nvm_sh_e2e",
+    "verify:nvm-windows:probe": "cargo run --manifest-path src-tauri/Cargo.toml --bin verify_nvm_windows_probe",
     "tauri": "tauri"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-dialog": "^2.7.1",
     "@tauri-apps/plugin-opener": "^2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

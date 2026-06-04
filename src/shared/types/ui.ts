@@ -13,6 +13,8 @@ export type StatusKey =
   | "ok"
   | "warn"
   | "missing"
+  | "damaged"
+  | "cancelled"
   | "success"
   | "failed"
   | "running";
