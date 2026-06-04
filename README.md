@@ -2,7 +2,7 @@
 
 [English README](./README.en.md)
 
-![NodePilot logo](./src/assets/nodepilot-logo.svg)
+![NodePilot logo](https://raw.githubusercontent.com/HaoRangQi/NodePilot/master/src/assets/nodepilot-logo.svg?v=20260604-1)
 
 NodePilot 是基于 `nvm` 的一个本地桌面版 Node 版本与项目运行环境管理器。它使用 `Tauri 2 + React + Vite + TypeScript + Rust`，把 `nvm-sh/nvm` 与 `nvm-windows` 的常用操作整理成一个 Material You / Material 3 风格的工具型界面。
 

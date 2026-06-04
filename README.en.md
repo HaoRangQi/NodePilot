@@ -2,7 +2,7 @@
 
 [中文说明 / Chinese README](./README.md)
 
-![NodePilot logo](./src/assets/nodepilot-logo.svg)
+![NodePilot logo](https://raw.githubusercontent.com/HaoRangQi/NodePilot/master/src/assets/nodepilot-logo.svg?v=20260604-1)
 
 NodePilot is a local desktop Node runtime and project environment manager built on top of `nvm`. It uses `Tauri 2 + React + Vite + TypeScript + Rust` to turn common `nvm-sh/nvm` and `nvm-windows` workflows into a Material You / Material 3 tooling UI.
 
