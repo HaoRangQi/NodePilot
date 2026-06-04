@@ -491,6 +491,17 @@ pnpm verify:all
 - 人工复核了什么
 - 实际跑过哪些验证命令
 
+## 致谢
+
+NodePilot 首版的产品梳理、界面原型、实现推进、验证收口和文档整理过程中，使用了 OpenAI Codex 作为工程协作与开发辅助工具。
+
+Codex 主要参与辅助了这些工作：
+
+- 信息架构与执行文档整理
+- Tauri + React + TypeScript 首版实现推进
+- 测试、验证脚本与发布前收口
+- README、验收文档与贡献说明整理
+
 ## 相关文档
 
 - [执行文档](./docs/EXECUTION.md)

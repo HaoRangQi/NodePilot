@@ -491,6 +491,17 @@ If a contribution used GPT assistance, document it in the PR or submission notes
 - what a human reviewed
 - which verification commands were actually run
 
+## Acknowledgements
+
+The first release of NodePilot used OpenAI Codex as an engineering collaboration and development aid during product shaping, UI prototyping, implementation, verification, and documentation work.
+
+Codex specifically assisted with:
+
+- information architecture and execution document structuring
+- delivery of the first Tauri + React + TypeScript implementation
+- test, verification-script, and pre-release wrap-up work
+- README, verification guides, and contribution documentation
+
 ## Related Documents
 
 - [Execution document](./docs/EXECUTION.md)
