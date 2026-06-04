@@ -1,0 +1,109 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="cardBg" x1="64" y1="64" x2="576" y2="576" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FAFAFA"/>
+      <stop offset="1" stop-color="#F3F4F6"/>
+    </linearGradient>
+    <linearGradient id="iconBg" x1="116" y1="116" x2="524" y2="524" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#182233"/>
+      <stop offset="0.48" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0B1220"/>
+    </linearGradient>
+    <radialGradient id="warmBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(274 186) rotate(135) scale(176 136)">
+      <stop offset="0" stop-color="#FF7D7A" stop-opacity="0.98"/>
+      <stop offset="0.42" stop-color="#FF4D6D" stop-opacity="0.62"/>
+      <stop offset="1" stop-color="#FF4D6D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="purpleBloom" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(404 420) rotate(138) scale(220 182)">
+      <stop offset="0" stop-color="#4E8CFF" stop-opacity="0.8"/>
+      <stop offset="0.38" stop-color="#7C4DFF" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#7C4DFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="pStroke" x1="186" y1="152" x2="398" y2="328" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFBB72"/>
+      <stop offset="0.2" stop-color="#FF8D6B"/>
+      <stop offset="0.62" stop-color="#FF5F82"/>
+      <stop offset="1" stop-color="#FF4B68"/>
+    </linearGradient>
+    <linearGradient id="nStroke" x1="180" y1="214" x2="346" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#74F7E5"/>
+      <stop offset="0.42" stop-color="#44DDD1"/>
+      <stop offset="1" stop-color="#24B7C2"/>
+    </linearGradient>
+    <linearGradient id="vStroke" x1="464" y1="218" x2="334" y2="444" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#A768FF"/>
+      <stop offset="1" stop-color="#7A47FF"/>
+    </linearGradient>
+    <filter id="cardShadow" x="28" y="36" width="584" height="584" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="10"/>
+      <feGaussianBlur stdDeviation="16"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0588235 0 0 0 0 0.0901961 0 0 0 0 0.152941 0 0 0 0.16 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1" result="shape"/>
+    </filter>
+    <filter id="neonGlowWarm" x="120" y="96" width="348" height="328" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="14" result="effect1_foregroundBlur_1"/>
+    </filter>
+    <filter id="neonGlowCool" x="110" y="156" width="332" height="348" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="12" result="effect1_foregroundBlur_1"/>
+    </filter>
+    <filter id="neonGlowViolet" x="272" y="152" width="248" height="352" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="12" result="effect1_foregroundBlur_1"/>
+    </filter>
+    <filter id="softHighlight" x="90" y="90" width="460" height="460" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="1.6" result="effect1_foregroundBlur_1"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#cardShadow)">
+    <rect x="48" y="48" width="544" height="544" rx="30" fill="url(#cardBg)"/>
+    <rect x="48.75" y="48.75" width="542.5" height="542.5" rx="29.25" stroke="#D7DCE3" stroke-width="1.5"/>
+  </g>
+
+  <g>
+    <rect x="116" y="116" width="408" height="408" rx="88" fill="url(#iconBg)"/>
+    <rect x="116" y="116" width="408" height="408" rx="88" fill="url(#warmBloom)"/>
+    <rect x="116" y="116" width="408" height="408" rx="88" fill="url(#purpleBloom)"/>
+    <rect x="116.75" y="116.75" width="406.5" height="406.5" rx="87.25" stroke="rgba(255,255,255,0.08)"/>
+  </g>
+
+  <g opacity="0.82">
+    <ellipse cx="250" cy="168" rx="70" ry="28" fill="#FFD79B"/>
+    <ellipse cx="250" cy="168" rx="100" ry="48" fill="#FF6B6B" fill-opacity="0.14"/>
+  </g>
+
+  <g filter="url(#neonGlowWarm)" opacity="0.9">
+    <path d="M194 170H318C383.17 170 428 214.83 428 280C428 345.17 383.17 390 318 390H280" stroke="#FF6E7D" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M194 170H318C383.17 170 428 214.83 428 280C428 345.17 383.17 390 318 390H280" stroke="url(#pStroke)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g filter="url(#neonGlowCool)" opacity="0.96">
+    <path d="M178 222V436" stroke="#3FE1D0" stroke-width="42" stroke-linecap="round"/>
+    <path d="M270 232L382 406" stroke="#3AD4CA" stroke-width="42" stroke-linecap="round"/>
+  </g>
+  <path d="M178 222V436" stroke="url(#nStroke)" stroke-width="34" stroke-linecap="round"/>
+  <path d="M270 232L382 406" stroke="url(#nStroke)" stroke-width="34" stroke-linecap="round"/>
+
+  <g filter="url(#neonGlowViolet)" opacity="0.96">
+    <path d="M452 228L354 430" stroke="#8E5DFF" stroke-width="46" stroke-linecap="round"/>
+  </g>
+  <path d="M452 228L354 430" stroke="url(#vStroke)" stroke-width="36" stroke-linecap="round"/>
+
+  <g filter="url(#softHighlight)" opacity="0.72">
+    <path d="M200 170H320" stroke="#FFF5E8" stroke-width="9" stroke-linecap="round"/>
+    <path d="M193 224V430" stroke="#DFFFF9" stroke-width="8" stroke-linecap="round"/>
+    <path d="M294 246L372 368" stroke="#DFFFF9" stroke-width="8" stroke-linecap="round"/>
+    <path d="M438 240L378 364" stroke="#F4E7FF" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>
