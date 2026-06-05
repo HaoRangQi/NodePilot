@@ -1,0 +1,12 @@
+{
+  "id": "unify-shell-background-colors",
+  "title": "Unify the shell background colors",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T04:58:59Z",
+  "branch": "master"
+}
