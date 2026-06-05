@@ -1,0 +1,4 @@
+{"path":"src-tauri/tauri.conf.json","reason":"Enables undecorated transparent macOS window for rounded CSS shell."}
+{"path":"src/App.tsx","reason":"Adds explicit Tauri startDragging behavior on the custom chrome."}
+{"path":"src/App.css","reason":"Clears host background, rounds the app shell, and clips content to the rounded window."}
+{"path":"src/App.test.tsx","reason":"Covers custom window control actions and drag start wiring."}

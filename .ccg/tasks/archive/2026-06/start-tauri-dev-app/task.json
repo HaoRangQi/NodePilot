@@ -1,0 +1,12 @@
+{
+  "id": "start-tauri-dev-app",
+  "title": "Start the Tauri development app",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "frontend-runtime",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T03:52:43Z",
+  "branch": "master"
+}

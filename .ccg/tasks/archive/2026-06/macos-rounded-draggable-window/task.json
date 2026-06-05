@@ -1,0 +1,12 @@
+{
+  "id": "macos-rounded-draggable-window",
+  "title": "Round the custom macOS-style window and restore dragging",
+  "status": "completed",
+  "complexity": "M",
+  "risk": "medium",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T03:54:42Z",
+  "branch": "master"
+}
