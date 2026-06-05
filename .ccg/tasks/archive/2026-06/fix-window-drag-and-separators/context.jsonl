@@ -1,0 +1,4 @@
+{"path":"src-tauri/capabilities/default.json","reason":"Grants the Tauri window start_dragging permission."}
+{"path":"src/App.tsx","reason":"Routes mouse down on chrome and top-bar blank areas to Tauri startDragging."}
+{"path":"src/App.css","reason":"Removes the top and side separator borders and app-region CSS."}
+{"path":"src/App.test.tsx","reason":"Verifies drag start wiring and window control actions."}

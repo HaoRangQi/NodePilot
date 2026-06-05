@@ -1,0 +1,12 @@
+{
+  "id": "fix-window-drag-and-separators",
+  "title": "Fix custom window dragging and remove separator lines",
+  "status": "completed",
+  "complexity": "M",
+  "risk": "medium",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T04:42:31Z",
+  "branch": "master"
+}
