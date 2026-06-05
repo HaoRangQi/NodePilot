@@ -1,0 +1,12 @@
+{
+  "id": "start-dev-preview",
+  "title": "Start dev server for preview",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T03:45:00Z",
+  "branch": "master"
+}
