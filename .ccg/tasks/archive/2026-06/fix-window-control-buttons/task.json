@@ -1,0 +1,12 @@
+{
+  "id": "fix-window-control-buttons",
+  "title": "Fix ineffective custom window control buttons",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task record",
+  "createdAt": "2026-06-05T05:24:30Z",
+  "branch": "master"
+}

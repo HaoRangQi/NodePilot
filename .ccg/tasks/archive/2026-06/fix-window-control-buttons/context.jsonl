@@ -1,0 +1,3 @@
+{"path":"src/App.tsx","role":"event wiring","note":"Existing custom buttons call close, minimize, and toggleMaximize through @tauri-apps/api/window."}
+{"path":"src-tauri/capabilities/default.json","role":"canonical fix owner","note":"Added explicit Tauri window permissions for close, minimize, and toggle-maximize."}
+{"path":"src-tauri/target/debug/build/nodepilot-1d428f877343e920/out/capabilities.json","role":"generated verification artifact","note":"Updated dev build capability includes close, minimize, start-dragging, and toggle-maximize permissions."}
