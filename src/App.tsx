@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { open } from "@tauri-apps/plugin-dialog";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { openPath, openUrl } from "@tauri-apps/plugin-opener";
 import nodePilotLogo from "./assets/nodepilot-logo.svg";
 import {
@@ -186,6 +188,12 @@ const translations = {
     navAria: {
       primary: "主导航",
       open: "打开",
+    },
+    windowControls: {
+      group: "窗口控制",
+      close: "关闭窗口",
+      minimize: "最小化窗口",
+      maximize: "最大化窗口",
     },
     status: {
       current: "当前",
@@ -495,6 +503,12 @@ const translations = {
     navAria: {
       primary: "Primary navigation",
       open: "Open",
+    },
+    windowControls: {
+      group: "Window controls",
+      close: "Close window",
+      minimize: "Minimize window",
+      maximize: "Maximize window",
     },
     status: {
       current: "Current",
@@ -819,6 +833,50 @@ function getInitialTheme(): Theme {
 
 function getSystemTheme(): Exclude<Theme, "system"> {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+type WindowControlAction = "close" | "minimize" | "maximize";
+
+const windowControlItems: Array<{ action: WindowControlAction; className: string }> = [
+  { action: "close", className: "window-control-close" },
+  { action: "minimize", className: "window-control-minimize" },
+  { action: "maximize", className: "window-control-maximize" },
+];
+
+async function runWindowControl(action: WindowControlAction): Promise<void> {
+  try {
+    const currentWindow = getCurrentWindow();
+
+    switch (action) {
+      case "close":
+        await currentWindow.close();
+        break;
+      case "minimize":
+        await currentWindow.minimize();
+        break;
+      case "maximize":
+        await currentWindow.toggleMaximize();
+        break;
+    }
+  } catch (error) {
+    console.error(`Unable to ${action} the current window.`, error);
+  }
+}
+
+async function startWindowDrag(): Promise<void> {
+  try {
+    await getCurrentWindow().startDragging();
+  } catch (error) {
+    console.error("Unable to drag the current window.", error);
+  }
+}
+
+function handleWindowDragMouseDown(event: ReactMouseEvent<HTMLElement>): void {
+  if (event.button !== 0) return;
+  if (event.target instanceof HTMLElement && event.target.closest("button, a, input, select, textarea")) {
+    return;
+  }
+  void startWindowDrag();
 }
 
 function statusTone(status: StatusKey): Tone {
@@ -1341,6 +1399,35 @@ function shellIntegrationSnippet(nvmDir: string | null): string {
 
 function Chip({ label, tone = "neutral" }: { label: string; tone?: Tone }) {
   return <span className={`chip chip-${tone}`}>{label}</span>;
+}
+
+function WindowControls({ copy }: { copy: Copy }) {
+  return (
+    <div
+      className="window-chrome"
+      onMouseDown={handleWindowDragMouseDown}
+      onDoubleClick={() => void runWindowControl("maximize")}
+    >
+      <div
+        className="window-controls"
+        role="group"
+        aria-label={copy.windowControls.group}
+        onDoubleClick={(event) => event.stopPropagation()}
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        {windowControlItems.map((item) => (
+          <button
+            aria-label={copy.windowControls[item.action]}
+            className={`window-control ${item.className}`}
+            key={item.action}
+            onClick={() => void runWindowControl(item.action)}
+            title={copy.windowControls[item.action]}
+            type="button"
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function SectionHeader({ title, eyebrow }: { title: string; eyebrow: string }) {
@@ -4324,7 +4411,11 @@ function App() {
   }, [locale]);
 
   useEffect(() => {
-    localStorage.setItem(THEME_STORAGE_KEY, theme);
+    if (theme === "system") {
+      localStorage.removeItem(THEME_STORAGE_KEY);
+    } else {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    }
     document.documentElement.style.colorScheme = activeTheme;
   }, [theme, activeTheme]);
 
@@ -4445,6 +4536,7 @@ function App() {
 
   return (
     <main className="app-shell" data-theme={activeTheme} ref={rootRef}>
+      <WindowControls copy={copy} />
       <aside className="navigation-rail" aria-label={copy.navAria.primary}>
         <div className="brand-mark" aria-label={PROJECT_NAME}>
           <img src={nodePilotLogo} alt="" aria-hidden="true" />
@@ -4472,7 +4564,7 @@ function App() {
       </aside>
 
       <section className="content-shell">
-        <header className="top-bar">
+        <header className="top-bar" onMouseDown={handleWindowDragMouseDown}>
           <div>
             <span className="eyebrow">
               {PROJECT_NAME} · {copy.appSubtitle}

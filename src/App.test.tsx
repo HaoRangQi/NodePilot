@@ -30,6 +30,10 @@ const writeManualUiCommandResultMock = vi.hoisted(() => vi.fn());
 const writeManualUiSnapshotMock = vi.hoisted(() => vi.fn());
 const writeProjectVersionMock = vi.hoisted(() => vi.fn());
 const writeTextMock = vi.hoisted(() => vi.fn());
+const minimizeWindowMock = vi.hoisted(() => vi.fn());
+const toggleMaximizeWindowMock = vi.hoisted(() => vi.fn());
+const closeWindowMock = vi.hoisted(() => vi.fn());
+const startDraggingWindowMock = vi.hoisted(() => vi.fn());
 
 function deferred<T>() {
   let resolve!: (value: T) => void;
@@ -68,6 +72,15 @@ vi.mock("./shared/api/backend", async () => {
   };
 });
 
+vi.mock("@tauri-apps/api/window", () => ({
+  getCurrentWindow: () => ({
+    minimize: minimizeWindowMock,
+    toggleMaximize: toggleMaximizeWindowMock,
+    close: closeWindowMock,
+    startDragging: startDraggingWindowMock,
+  }),
+}));
+
 describe("App", () => {
   beforeEach(() => {
     let installTaskSequence = 0;
@@ -83,6 +96,14 @@ describe("App", () => {
     });
     writeTextMock.mockReset();
     writeTextMock.mockResolvedValue(undefined);
+    minimizeWindowMock.mockReset();
+    minimizeWindowMock.mockResolvedValue(undefined);
+    toggleMaximizeWindowMock.mockReset();
+    toggleMaximizeWindowMock.mockResolvedValue(undefined);
+    closeWindowMock.mockReset();
+    closeWindowMock.mockResolvedValue(undefined);
+    startDraggingWindowMock.mockReset();
+    startDraggingWindowMock.mockResolvedValue(undefined);
     getBackendSnapshotMock.mockReset();
     getBackendSnapshotMock.mockResolvedValue(MOCK_BACKEND_SNAPSHOT);
     detectBackendMock.mockReset();
@@ -236,6 +257,26 @@ describe("App", () => {
     expect(screen.getAllByText("nvm-sh").length).toBeGreaterThan(0);
   });
 
+  it("renders compact custom window controls wired to Tauri window actions", async () => {
+    const { container } = render(<App />);
+
+    expect(container.querySelector(".window-chrome")).toBeInTheDocument();
+
+    fireEvent.mouseDown(container.querySelector(".window-chrome") as HTMLElement, { button: 0 });
+    fireEvent.mouseDown(container.querySelector(".top-bar") as HTMLElement, { button: 0 });
+    fireEvent.mouseDown(screen.getByLabelText("Minimize window"), { button: 0 });
+    fireEvent.click(screen.getByLabelText("Minimize window"));
+    fireEvent.click(screen.getByLabelText("Maximize window"));
+    fireEvent.click(screen.getByLabelText("Close window"));
+
+    await waitFor(() => {
+      expect(startDraggingWindowMock).toHaveBeenCalledTimes(2);
+      expect(minimizeWindowMock).toHaveBeenCalledTimes(1);
+      expect(toggleMaximizeWindowMock).toHaveBeenCalledTimes(1);
+      expect(closeWindowMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
   it("uses the persisted locale and theme", () => {
     localStorage.setItem("nodepilot.locale", "en-US");
     localStorage.setItem("nodepilot.theme", "dark");
@@ -244,6 +285,29 @@ describe("App", () => {
 
     expect(screen.getByRole("heading", { name: "Home" })).toBeInTheDocument();
     expect(container.querySelector(".app-shell")).toHaveAttribute("data-theme", "dark");
+  });
+
+  it("defaults theme to the system preference without persisting an override", async () => {
+    Object.defineProperty(window, "matchMedia", {
+      configurable: true,
+      value: (query: string): MediaQueryList => ({
+        matches: query === "(prefers-color-scheme: dark)",
+        media: query,
+        onchange: null,
+        addEventListener: () => undefined,
+        removeEventListener: () => undefined,
+        addListener: () => undefined,
+        removeListener: () => undefined,
+        dispatchEvent: () => false,
+      }),
+    });
+
+    const { container } = render(<App />);
+
+    expect(container.querySelector(".app-shell")).toHaveAttribute("data-theme", "dark");
+    await waitFor(() => {
+      expect(localStorage.getItem("nodepilot.theme")).toBeNull();
+    });
   });
 
   it("renders the backend snapshot on Home", async () => {

@@ -1,170 +1,83 @@
-<svg width="512" height="512" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">NodePilot icon</title>
+  <desc id="desc">A compass pointer crossing connected version nodes inside a rounded macOS-style app icon.</desc>
   <defs>
-    <linearGradient id="bgPaper" x1="10" y1="8" x2="118" y2="120" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#F2E8D8"/>
-      <stop offset="0.5" stop-color="#E7D9C3"/>
-      <stop offset="1" stop-color="#D5C2A8"/>
+    <linearGradient id="base" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbfffb" />
+      <stop offset="0.48" stop-color="#e7f7f1" />
+      <stop offset="1" stop-color="#d8ece6" />
     </linearGradient>
-    <linearGradient id="framePaper" x1="18" y1="14" x2="108" y2="112" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FBF6ED"/>
-      <stop offset="0.5" stop-color="#F3EBDD"/>
-      <stop offset="1" stop-color="#E1D1BB"/>
+    <linearGradient id="rim" x1="184" y1="136" x2="840" y2="896" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.92" />
+      <stop offset="1" stop-color="#8fb9ad" stop-opacity="0.36" />
     </linearGradient>
-    <linearGradient id="warmLayer" x1="24" y1="18" x2="84" y2="60" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFB38B"/>
-      <stop offset="0.54" stop-color="#FF6C73"/>
-      <stop offset="1" stop-color="#E93D58"/>
+    <linearGradient id="needle" x1="279" y1="746" x2="748" y2="279" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d5f58" />
+      <stop offset="0.62" stop-color="#269383" />
+      <stop offset="1" stop-color="#38d5b9" />
     </linearGradient>
-    <linearGradient id="tealLayer" x1="20" y1="38" x2="62" y2="108" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#9BF3E4"/>
-      <stop offset="0.55" stop-color="#43C6B6"/>
-      <stop offset="1" stop-color="#177E82"/>
+    <linearGradient id="needleTip" x1="590" y1="224" x2="818" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffbd2e" />
+      <stop offset="1" stop-color="#ff5f57" />
     </linearGradient>
-    <linearGradient id="violetLayer" x1="56" y1="38" x2="104" y2="106" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#D995FF"/>
-      <stop offset="0.55" stop-color="#8A4EFF"/>
-      <stop offset="1" stop-color="#4B74FF"/>
-    </linearGradient>
-    <linearGradient id="goldEdge" x1="16" y1="18" x2="106" y2="112" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#F9F0DF"/>
-      <stop offset="0.4" stop-color="#C7A56C"/>
-      <stop offset="1" stop-color="#8A6A3D"/>
-    </linearGradient>
-    <pattern id="halftoneWarm" x="0" y="0" width="7" height="7" patternUnits="userSpaceOnUse">
-      <circle cx="1.4" cy="1.4" r="1.2" fill="#FFD7B5" fill-opacity="0.7"/>
-      <circle cx="5.2" cy="4.7" r="0.9" fill="#FFD7B5" fill-opacity="0.45"/>
-      <circle cx="3.6" cy="6.4" r="0.5" fill="#FFD7B5" fill-opacity="0.35"/>
-    </pattern>
-    <pattern id="halftoneCool" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
-      <circle cx="1.1" cy="1.2" r="0.9" fill="#D8D2FF" fill-opacity="0.46"/>
-      <circle cx="4.4" cy="3.4" r="0.75" fill="#D8D2FF" fill-opacity="0.3"/>
-      <circle cx="2.9" cy="5.1" r="0.45" fill="#D8D2FF" fill-opacity="0.26"/>
-    </pattern>
-    <pattern id="hatchDark" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(32)">
-      <line x1="0" y1="0" x2="0" y2="8" stroke="#6D5942" stroke-opacity="0.14" stroke-width="1.1"/>
-      <line x1="4" y1="0" x2="4" y2="8" stroke="#6D5942" stroke-opacity="0.08" stroke-width="0.7"/>
-    </pattern>
-    <pattern id="microNoise" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
-      <rect width="5" height="5" fill="transparent"/>
-      <circle cx="1" cy="1" r="0.34" fill="#7A5C45" fill-opacity="0.24"/>
-      <circle cx="3.8" cy="1.9" r="0.26" fill="#8E7053" fill-opacity="0.2"/>
-      <circle cx="2.1" cy="4.1" r="0.3" fill="#9E8164" fill-opacity="0.18"/>
-      <circle cx="4.2" cy="4.2" r="0.22" fill="#6F5640" fill-opacity="0.14"/>
-    </pattern>
-    <filter id="paperGrain" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feTurbulence type="fractalNoise" baseFrequency="0.95" numOctaves="2" seed="7" result="noise"/>
-      <feColorMatrix in="noise" type="saturate" values="0"/>
-      <feComponentTransfer>
-        <feFuncA type="table" tableValues="0 0.03"/>
-      </feComponentTransfer>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#12352f" flood-opacity="0.22" />
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#12352f" flood-opacity="0.12" />
     </filter>
-    <filter id="outerShadow" x="2" y="2" width="124" height="124" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="8"/>
-      <feGaussianBlur stdDeviation="7"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.176471 0 0 0 0 0.133333 0 0 0 0 0.0901961 0 0 0 0.28 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
+    <filter id="markShadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0b312d" flood-opacity="0.24" />
     </filter>
-    <filter id="panelShadow" x="10" y="8" width="108" height="116" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="4"/>
-      <feGaussianBlur stdDeviation="4"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.227451 0 0 0 0 0.172549 0 0 0 0 0.121569 0 0 0 0.22 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
-    </filter>
-    <filter id="embossShadow" x="14" y="12" width="100" height="102" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="3"/>
-      <feGaussianBlur stdDeviation="2.2"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0.188235 0 0 0 0 0.14902 0 0 0 0 0.113725 0 0 0 0.28 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_1"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_1" result="shape"/>
-    </filter>
-    <clipPath id="pClip">
-      <path d="M28 18H61C71.4934 18 80 26.5066 80 37C80 47.4934 71.4934 56 61 56H47.5C45.567 56 44 54.433 44 52.5C44 50.567 45.567 49 47.5 49H59C65.6274 49 71 43.6274 71 37C71 30.3726 65.6274 25 59 25H28C25.7909 25 24 23.2091 24 21C24 19.3431 25.3431 18 27 18H28Z"/>
-    </clipPath>
-    <clipPath id="nClip">
-      <path d="M26 31C29.866 31 33 34.134 33 38V94C33 97.866 29.866 101 26 101C22.134 101 19 97.866 19 94V38C19 34.134 22.134 31 26 31Z"/>
-    </clipPath>
-    <clipPath id="nDiagClip">
-      <path d="M42.8 35.4C45.6408 33.2433 49.6925 33.7976 51.8491 36.6384L75.2 67.4L69.4 80.6L43.5616 46.6491C41.4049 43.8083 41.9592 39.7567 44.8 37.6L42.8 35.4Z"/>
-    </clipPath>
-    <clipPath id="vClip">
-      <path d="M75.4084 67.8823L91.174 35.8976C92.8862 32.4328 97.0809 31.0116 100.546 32.7238C104.01 34.436 105.432 38.6307 103.719 42.0955L83.5053 83.0955C81.7931 86.5603 77.5984 87.9815 74.1336 86.2693C70.6688 84.5571 69.2476 80.3624 70.9598 76.8976L75.4084 67.8823Z"/>
-    </clipPath>
   </defs>
 
-  <g filter="url(#outerShadow)">
-    <rect x="8" y="8" width="112" height="112" rx="30" fill="url(#bgPaper)"/>
-    <rect x="8" y="8" width="112" height="112" rx="30" fill="url(#microNoise)"/>
-    <rect x="8" y="8" width="112" height="112" rx="30" fill="url(#hatchDark)"/>
-    <rect x="8.5" y="8.5" width="111" height="111" rx="29.5" stroke="#8B7458" stroke-opacity="0.38"/>
+  <rect width="1024" height="1024" rx="226" fill="url(#base)" />
+  <rect x="48" y="48" width="928" height="928" rx="188" fill="none" stroke="url(#rim)" stroke-width="28" />
+  <path
+    d="M208 654c82-126 194-230 331-301 74-38 154-64 237-77"
+    fill="none"
+    stroke="#cfe7de"
+    stroke-width="54"
+    stroke-linecap="round"
+  />
+  <path
+    d="M216 651c86-116 197-210 329-279 69-36 142-60 220-73"
+    fill="none"
+    stroke="#286a62"
+    stroke-width="26"
+    stroke-linecap="round"
+    stroke-dasharray="1 74"
+  />
+
+  <g filter="url(#softShadow)">
+    <circle cx="272" cy="666" r="64" fill="#ffffff" />
+    <circle cx="272" cy="666" r="41" fill="#aeece2" />
+    <circle cx="512" cy="512" r="72" fill="#ffffff" />
+    <circle cx="512" cy="512" r="45" fill="#ffdcc2" />
+    <circle cx="748" cy="306" r="64" fill="#ffffff" />
+    <circle cx="748" cy="306" r="40" fill="#d5e3ff" />
   </g>
 
-  <g filter="url(#paperGrain)">
-    <rect x="8" y="8" width="112" height="112" rx="30" fill="#000000"/>
+  <g filter="url(#markShadow)">
+    <path
+      d="M263 756 470 390c18-32 62-35 84-6l94 125-128 46-75-98-132 330c-13 33-65 1-50-31Z"
+      fill="url(#needle)"
+    />
+    <path
+      d="M500 388 802 210 678 526 620 421 500 388Z"
+      fill="url(#needleTip)"
+    />
+    <path
+      d="M500 388 620 421 678 526 548 476Z"
+      fill="#174640"
+      opacity="0.3"
+    />
   </g>
 
-  <g filter="url(#panelShadow)">
-    <path d="M18 18C18 14.6863 20.6863 12 24 12H95C98.3137 12 101 14.6863 101 18V92.5C101 95.8137 98.3137 98.5 95 98.5H38.5L18 118V18Z" fill="url(#framePaper)"/>
-    <path d="M18 118L38.5 98.5H28.5C22.701 98.5 18 93.799 18 88V118Z" fill="#DCC8B0"/>
-    <path d="M18 118L32.5 104.4H24.6C20.9559 104.4 18 101.444 18 97.8V118Z" fill="#CBB294"/>
-    <path d="M20 20H96V90C96 92.7614 93.7614 95 91 95H39.4L23 110.6V23C23 21.3431 21.6569 20 20 20Z" fill="url(#microNoise)" fill-opacity="0.8"/>
-    <path d="M20 20H96V90C96 92.7614 93.7614 95 91 95H39.4L23 110.6V23C23 21.3431 21.6569 20 20 20Z" fill="url(#hatchDark)" fill-opacity="0.5"/>
-  </g>
-
-  <path d="M24 22H95V89C95 91.2091 93.2091 93 91 93H39L25 106.2V26C25 23.7909 23.2091 22 21 22H24Z" fill="#FFF9F0" fill-opacity="0.26"/>
-
-  <g filter="url(#embossShadow)">
-    <path d="M28 18H61C71.4934 18 80 26.5066 80 37C80 47.4934 71.4934 56 61 56H47.5C45.567 56 44 54.433 44 52.5C44 50.567 45.567 49 47.5 49H59C65.6274 49 71 43.6274 71 37C71 30.3726 65.6274 25 59 25H28C25.7909 25 24 23.2091 24 21C24 19.3431 25.3431 18 27 18H28Z" fill="url(#warmLayer)"/>
-    <g clip-path="url(#pClip)">
-      <rect x="20" y="14" width="66" height="48" fill="url(#halftoneWarm)"/>
-      <rect x="20" y="14" width="66" height="48" fill="url(#microNoise)" fill-opacity="0.6"/>
-      <path d="M25 23H73" stroke="white" stroke-opacity="0.34" stroke-width="2"/>
-      <path d="M24 28H77" stroke="#AE2747" stroke-opacity="0.18" stroke-width="1.2"/>
-      <path d="M24 34H79" stroke="#AE2747" stroke-opacity="0.18" stroke-width="1.2"/>
-      <path d="M24 40H74" stroke="#AE2747" stroke-opacity="0.18" stroke-width="1.2"/>
-    </g>
-
-    <path d="M26 31C29.866 31 33 34.134 33 38V94C33 97.866 29.866 101 26 101C22.134 101 19 97.866 19 94V38C19 34.134 22.134 31 26 31Z" fill="url(#tealLayer)"/>
-    <g clip-path="url(#nClip)">
-      <rect x="18" y="30" width="17" height="74" fill="url(#halftoneCool)"/>
-      <rect x="18" y="30" width="17" height="74" fill="url(#microNoise)" fill-opacity="0.55"/>
-      <path d="M22 35V97" stroke="white" stroke-opacity="0.28" stroke-width="2.1" stroke-linecap="round"/>
-      <path d="M29 33V95" stroke="#0F5D62" stroke-opacity="0.18" stroke-width="1.1" stroke-linecap="round"/>
-    </g>
-
-    <path d="M42.8 35.4C45.6408 33.2433 49.6925 33.7976 51.8491 36.6384L75.2 67.4L69.4 80.6L43.5616 46.6491C41.4049 43.8083 41.9592 39.7567 44.8 37.6L42.8 35.4Z" fill="url(#tealLayer)"/>
-    <g clip-path="url(#nDiagClip)">
-      <rect x="37" y="30" width="40" height="54" fill="url(#halftoneWarm)" fill-opacity="0.3"/>
-      <rect x="37" y="30" width="40" height="54" fill="url(#microNoise)" fill-opacity="0.6"/>
-      <path d="M43 37L72 75" stroke="white" stroke-opacity="0.24" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M49 39L73 70" stroke="#125E66" stroke-opacity="0.16" stroke-width="1.2" stroke-linecap="round"/>
-    </g>
-
-    <path d="M75.4084 67.8823L91.174 35.8976C92.8862 32.4328 97.0809 31.0116 100.546 32.7238C104.01 34.436 105.432 38.6307 103.719 42.0955L83.5053 83.0955C81.7931 86.5603 77.5984 87.9815 74.1336 86.2693C70.6688 84.5571 69.2476 80.3624 70.9598 76.8976L75.4084 67.8823Z" fill="url(#violetLayer)"/>
-    <path d="M68.8 80.2L74.4 67.9L80.6 80.7C82.3147 84.2374 80.8371 88.4997 77.2997 90.2144C73.7623 91.929 69.5 90.4514 67.7854 86.914L65.8 82.8L68.8 80.2Z" fill="url(#violetLayer)"/>
-    <g clip-path="url(#vClip)">
-      <rect x="68" y="30" width="40" height="62" fill="url(#halftoneCool)"/>
-      <rect x="68" y="30" width="40" height="62" fill="url(#microNoise)" fill-opacity="0.64"/>
-      <path d="M96 36L77 78" stroke="white" stroke-opacity="0.3" stroke-width="2.1" stroke-linecap="round"/>
-      <path d="M89 37L74 70" stroke="#3A43C7" stroke-opacity="0.18" stroke-width="1.1" stroke-linecap="round"/>
-      <path d="M100 42L82 80" stroke="#3A43C7" stroke-opacity="0.14" stroke-width="1.1" stroke-linecap="round"/>
-    </g>
-  </g>
-
-  <path d="M28 18H61C71.4934 18 80 26.5066 80 37C80 47.4934 71.4934 56 61 56H47.5" stroke="#FFF7EC" stroke-opacity="0.46" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M26 32V99" stroke="#FFF7EC" stroke-opacity="0.42" stroke-width="2.2" stroke-linecap="round"/>
-  <path d="M44 38L74 78" stroke="#FFF7EC" stroke-opacity="0.28" stroke-width="2.1" stroke-linecap="round"/>
-  <path d="M97 36L76 79" stroke="#FFF7EC" stroke-opacity="0.34" stroke-width="2.1" stroke-linecap="round"/>
-
-  <path d="M21 22H95V90" stroke="url(#goldEdge)" stroke-opacity="0.28" stroke-width="1.2"/>
+  <path
+    d="M245 194c83-44 176-68 271-68 110 0 216 31 307 89"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="22"
+    stroke-linecap="round"
+    opacity="0.62"
+  />
 </svg>

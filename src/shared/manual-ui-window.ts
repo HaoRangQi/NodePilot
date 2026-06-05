@@ -1,3 +1,4 @@
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import type {
   ManualUiPoint,
   ManualUiSize,
@@ -14,7 +15,6 @@ type WindowGeometryInput = {
 
 export async function readManualUiWindowSnapshot(): Promise<ManualUiWindowSnapshot | null> {
   try {
-    const { getCurrentWindow } = await import("@tauri-apps/api/window");
     const currentWindow = getCurrentWindow();
     const [scaleFactor, innerPosition, outerPosition, innerSize, outerSize] = await Promise.all([
       currentWindow.scaleFactor(),

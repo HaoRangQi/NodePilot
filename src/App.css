@@ -3,7 +3,7 @@
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   color: var(--md-sys-color-on-surface);
-  background: var(--md-sys-color-background);
+  background: transparent;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -42,6 +42,8 @@
   --md-sys-shape-corner-small: 8px;
   --md-sys-shape-corner-medium: 12px;
   --md-sys-shape-corner-large: 18px;
+  --window-chrome-height: 34px;
+  --window-corner-radius: 14px;
 }
 
 * {
@@ -55,18 +57,26 @@ body {
   overflow: hidden;
 }
 
+html,
+body {
+  background: transparent;
+}
+
 button {
   border: 0;
   font: inherit;
 }
 
 .app-shell {
+  position: relative;
   display: grid;
   grid-template-columns: 112px minmax(0, 1fr);
+  height: 100vh;
   min-height: 100vh;
-  background:
-    linear-gradient(135deg, rgba(174, 236, 226, 0.32), transparent 38%),
-    var(--md-sys-color-background);
+  padding-top: var(--window-chrome-height);
+  overflow: hidden;
+  border-radius: var(--window-corner-radius);
+  background: var(--md-sys-color-background);
 }
 
 .app-shell[data-theme="dark"] {
@@ -97,9 +107,67 @@ button {
   --md-sys-color-code-container: #16201d;
   --md-sys-elevation-level1: 0 1px 2px rgba(0, 0, 0, 0.34);
   --md-sys-elevation-level2: 0 2px 10px rgba(0, 0, 0, 0.42);
-  background:
-    linear-gradient(135deg, rgba(15, 80, 73, 0.34), transparent 40%),
-    var(--md-sys-color-background);
+  background: var(--md-sys-color-background);
+}
+
+.window-chrome {
+  position: absolute;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  height: var(--window-chrome-height);
+  align-items: center;
+  padding: 0 14px;
+  border-radius: var(--window-corner-radius) var(--window-corner-radius) 0 0;
+  background: var(--md-sys-color-background);
+  user-select: none;
+}
+
+.app-shell[data-theme="dark"] .window-chrome {
+  background: var(--md-sys-color-background);
+}
+
+.window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window-control {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 13px;
+  padding: 0;
+  border: 1px solid rgba(23, 29, 27, 0.18);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    filter 160ms cubic-bezier(0.2, 0, 0, 1),
+    transform 160ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.window-control:hover {
+  filter: saturate(1.18) brightness(0.98);
+  transform: scale(1.08);
+}
+
+.window-control:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary);
+  outline-offset: 3px;
+}
+
+.window-control-close {
+  background: #ff5f57;
+}
+
+.window-control-minimize {
+  background: #ffbd2e;
+}
+
+.window-control-maximize {
+  background: #28c840;
 }
 
 .navigation-rail {
@@ -108,8 +176,7 @@ button {
   align-items: center;
   gap: 24px;
   padding: 22px 14px;
-  background: color-mix(in srgb, var(--md-sys-color-surface-container) 78%, transparent);
-  border-right: 1px solid color-mix(in srgb, var(--md-sys-color-outline) 24%, transparent);
+  background: var(--md-sys-color-background);
 }
 
 .brand-mark {
@@ -180,7 +247,7 @@ button {
 .content-shell {
   display: flex;
   min-width: 0;
-  max-height: 100vh;
+  max-height: calc(100vh - var(--window-chrome-height));
   flex-direction: column;
   padding: 26px 30px 30px;
   overflow: auto;

@@ -2,7 +2,9 @@
 
 [中文说明 / Chinese README](./README.md)
 
-![NodePilot logo](https://raw.githubusercontent.com/HaoRangQi/NodePilot/master/src/assets/nodepilot-logo-readme.png?v=20260604-3)
+![NodePilot logo](https://raw.githubusercontent.com/HaoRangQi/NodePilot/master/src/assets/nodepilot-logo-readme.png?v=20260605-1)
+
+![NodePilot app screenshot](https://raw.githubusercontent.com/HaoRangQi/NodePilot/master/src/assets/nodepilot-app-readme.png?v=20260605-1)
 
 NodePilot is a local desktop Node runtime and project environment manager built on top of `nvm`. It uses `Tauri 2 + React + Vite + TypeScript + Rust` to turn common `nvm-sh/nvm` and `nvm-windows` workflows into a Material You / Material 3 tooling UI.
 
@@ -168,9 +170,10 @@ Key constraints:
 
 ## Branding and Icons
 
-The README cover now uses a dark neon `PNV` brand mark:
+The README cover now uses the fresh NodePilot icon and app screenshot:
 
-- README cover image: [`src/assets/nodepilot-logo-readme.png`](./src/assets/nodepilot-logo-readme.png)
+- README icon image: [`src/assets/nodepilot-logo-readme.png`](./src/assets/nodepilot-logo-readme.png)
+- README app screenshot: [`src/assets/nodepilot-app-readme.png`](./src/assets/nodepilot-app-readme.png)
 - frontend brand asset: [`src/assets/nodepilot-logo.svg`](./src/assets/nodepilot-logo.svg)
 - desktop icon outputs: [`src-tauri/icons`](./src-tauri/icons)
 

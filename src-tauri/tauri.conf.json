@@ -14,12 +14,15 @@
       {
         "title": "NodePilot",
         "width": 1180,
-        "height": 760
+        "height": 760,
+        "decorations": false,
+        "transparent": true
       }
     ],
     "security": {
       "csp": null
-    }
+    },
+    "macOSPrivateApi": true
   },
   "bundle": {
     "active": true,
