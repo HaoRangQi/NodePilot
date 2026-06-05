@@ -1,0 +1,12 @@
+{
+  "id": "add-app-screenshot-to-readme",
+  "title": "Add app screenshot to README",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "documentation",
+  "currentPhase": "completed",
+  "nextAction": "Archive task record",
+  "createdAt": "2026-06-05T05:39:10Z",
+  "branch": "master"
+}

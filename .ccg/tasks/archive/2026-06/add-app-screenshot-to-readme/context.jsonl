@@ -1,0 +1,4 @@
+{"path":"src/assets/nodepilot-app-readme.png","role":"README app screenshot","note":"1440x1000 PNG captured from the local app with temporary Tauri IPC mock data."}
+{"path":"README.md","role":"Chinese README","note":"Added app screenshot below the logo and updated branding asset notes."}
+{"path":"README.en.md","role":"English README","note":"Added app screenshot below the logo and updated branding asset notes."}
+{"path":"src/assets/nodepilot-logo-readme.png","role":"existing README logo","note":"Left in place above the new app screenshot."}
