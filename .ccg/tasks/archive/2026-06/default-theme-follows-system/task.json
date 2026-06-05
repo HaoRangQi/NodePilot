@@ -1,0 +1,12 @@
+{
+  "id": "default-theme-follows-system",
+  "title": "Make system theme the default",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T05:02:43Z",
+  "branch": "master"
+}

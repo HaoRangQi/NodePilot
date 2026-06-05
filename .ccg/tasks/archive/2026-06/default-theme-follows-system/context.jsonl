@@ -1,0 +1,2 @@
+{"path":"src/App.tsx","reason":"Owns theme initialization, active theme derivation, and localStorage persistence."}
+{"path":"src/App.test.tsx","reason":"Covers default system theme behavior and persisted theme overrides."}
