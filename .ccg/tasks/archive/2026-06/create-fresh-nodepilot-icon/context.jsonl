@@ -1,0 +1,5 @@
+{"path":"src/assets/nodepilot-logo.svg","role":"new vector source","note":"Created from scratch as the single source for frontend brand and exported icons."}
+{"path":"src/assets/nodepilot-logo-readme.png","role":"README preview export","note":"Regenerated from the new SVG at the existing 640x640 size."}
+{"path":"src-tauri/icons/","role":"Tauri icon outputs","note":"Regenerated with `pnpm tauri icon src/assets/nodepilot-logo.svg --ios-color '#e7f7f1'`."}
+{"path":"README.md","role":"documentation reference","note":"Updated logo cache-busting query parameter."}
+{"path":"README.en.md","role":"documentation reference","note":"Updated logo cache-busting query parameter."}
