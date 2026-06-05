@@ -1,0 +1,12 @@
+{
+  "id": "fix-readme-logo-display",
+  "title": "Fix oversized stale README logo display",
+  "status": "completed",
+  "complexity": "S",
+  "risk": "low",
+  "domain": "documentation",
+  "currentPhase": "completed",
+  "nextAction": "Archive task record",
+  "createdAt": "2026-06-05T06:31:30Z",
+  "branch": "master"
+}

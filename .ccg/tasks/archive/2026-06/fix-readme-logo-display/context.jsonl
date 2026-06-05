@@ -1,0 +1,4 @@
+{"path":"README.md","role":"Chinese README","note":"Uses centered HTML image tags with width-limited SVG logo and app screenshot."}
+{"path":"README.en.md","role":"English README","note":"Uses centered HTML image tags with width-limited SVG logo and app screenshot."}
+{"path":"src/assets/nodepilot-logo.svg","role":"current icon source","note":"README now references this directly for the header icon."}
+{"path":"src/assets/nodepilot-logo-readme.png","role":"removed stale asset","note":"Deleted because no README or code path uses it after switching to SVG."}
