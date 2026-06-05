@@ -1,0 +1,12 @@
+{
+  "id": "custom-window-controls",
+  "title": "Replace native window header with compact custom controls",
+  "status": "completed",
+  "complexity": "M",
+  "risk": "medium",
+  "domain": "frontend",
+  "currentPhase": "completed",
+  "nextAction": "Archive task",
+  "createdAt": "2026-06-05T03:30:02Z",
+  "branch": "master"
+}

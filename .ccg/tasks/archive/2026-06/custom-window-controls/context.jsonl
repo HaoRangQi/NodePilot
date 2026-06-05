@@ -1,0 +1,5 @@
+{"path":"src-tauri/tauri.conf.json","reason":"Main Tauri window configuration controls native decorations."}
+{"path":"src/App.tsx","reason":"React application shell renders the navigation rail, top bar, and new custom window controls."}
+{"path":"src/App.css","reason":"Application shell CSS controls top-left placement, drag area, and layout offset."}
+{"path":"src/App.test.tsx","reason":"Focused tests cover rendering and action wiring for the custom window controls."}
+{"path":"src/shared/manual-ui-window.ts","reason":"Keeps Tauri window API imports consistent and avoids static/dynamic import build warnings."}
